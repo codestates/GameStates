@@ -1,7 +1,7 @@
 ---
 name: To Do List
 about: To Do List
-title: "[Task] 이슈카드 제목 설정하기"
+title: "[Dev] 제목 설정하기"
 labels: ''
 assignees: ''
 
@@ -9,8 +9,8 @@ assignees: ''
 
 #### Issue
 - Group: `Client` or `Server`
-- Type: `feature`
-- Detail: 추가: 페이지 작성
+- Branch: `feature`
+- Detail: 추가: 내용
 
 #### TODO
 1. [ ] Job1
