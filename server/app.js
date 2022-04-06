@@ -18,7 +18,7 @@ app.use(
   );
 
 app.use('/auth', authRouter);
-app.use('/board', boardRouter);
+app.use('/board',boardRouter);
 
 app.get('/', (req, res) => {
   res.status(200).send('success');
