@@ -3,7 +3,8 @@ const app = express();
 const cors = require('cors');
 const logger = require('morgan');
 const fs = require('fs');
-const indexRouter = require('./router');
+const authRouter = require('./router/auth');
+const boardRouter = require('./router/board');
 
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
@@ -16,7 +17,12 @@ app.use(
     })
   );
 
-app.use('/', indexRouter);
+app.use('/auth', authRouter);
+app.use('/board', boardRouter);
+
+app.get('/', (req, res) => {
+  res.status(200).send('success');
+});
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 4000;
 
