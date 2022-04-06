@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors');
 const logger = require('morgan');
 const fs = require('fs');
-const indexRouter = require('./routes');
+const indexRouter = require('./router');
 
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
