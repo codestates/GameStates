@@ -5,20 +5,24 @@ const logger = require('morgan');
 const fs = require('fs');
 const authRouter = require('./router/auth');
 const boardRouter = require('./router/board');
+const userRouter = require('./router/user');
+const commentRouter = require('./router/comment');
 
 app.use(express.json());
-app.use(express.urlencoded({extended:false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(logger('dev'));
 app.use(
-    cors({
-      origin: ['https://localhost:3000'],
-      credentials: true,
-      methods: ['GET', 'POST', 'OPTIONS']
-    })
-  );
+  cors({
+    origin: ['https://localhost:3000'],
+    credentials: true,
+    methods: ['GET', 'POST', 'OPTIONS']
+  })
+);
 
 app.use('/auth', authRouter);
-app.use('/board',boardRouter);
+app.use('/board', boardRouter);
+app.use('/user', userRouter);
+app.use('/comment', commentRouter);
 
 app.get('/', (req, res) => {
   res.status(200).send('success');
