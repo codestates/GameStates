@@ -1,0 +1,48 @@
+footer {
+    width: 100%;
+    padding: 32px 0;
+    touch-action: none;
+	.inner {
+		display: flex;
+		flex-wrap: wrap;
+		width: 1320px;
+		margin: 0 auto;
+	}
+	
+	.copy {
+		width: 100%;
+		margin-top: 55px;
+		padding: 26px 0;
+		border-top: solid 1px #eff3f0;
+		text-align: center;
+		color: #78787d;
+	}
+}
+
+@media screen and (max-width: $lg) {
+	footer {
+		.inner {
+			width: 100%;
+		}
+    }
+}
+
+@media screen and (max-width: $sm) {
+	footer {
+		padding: 45px 20px;
+	
+		.copy {
+			margin-top: 30px;
+		}
+	}
+}
+
+@media screen and (max-width: $xs) {
+	footer {
+		padding: 45px 20px;
+		touch-action: initial;
+		.copy {
+			margin-top:15px;
+		}
+	}
+}

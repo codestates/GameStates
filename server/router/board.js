@@ -1,7 +1,9 @@
 const router = require('express').Router();
 const boardController = require('../controller/board');
 
-router.get('/create', boardController.create);
-router.get('/delete', boardController.delete);
+router.get('/', boardController.getPost);
+router.post('/', boardController.writePost);
+router.patch('/:id', boardController.modifyPost);
+router.delete('/:id', boardController.deletePost);
 
 module.exports = router;
