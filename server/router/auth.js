@@ -1,5 +1,4 @@
 const router = require('express').Router();
-// .Router() 과연 필요한가 질문
 const authController = require('../controller/auth');
 
 router.post('/login', authController.login);

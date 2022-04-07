@@ -24,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER
   }, {
     sequelize,
+    freezeTableName:true,
     modelName: 'board',
   });
   return board;
