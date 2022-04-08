@@ -8,13 +8,6 @@ module.exports = {
 	rules: {
 		'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
 		'react/react-in-jsx-scope': 'off',
-	},
-
-	settings: {
-		'import/resolver': {
-			node: {
-				paths: ['src'],
-			},
-		},
+		'import/no-unresolved': 'off',
 	},
 };

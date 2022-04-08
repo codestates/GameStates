@@ -1,0 +1,13 @@
+// 반응형 셋팅
+$xl: 1439px;
+$lg: 1199px;
+$md: 991px;
+$sm: 767px;
+$xs: 575px; 
+
+@import "header";
+@import "footer";
+@import "set";
+@import "main";
+@import "signup";
+@import "login";
