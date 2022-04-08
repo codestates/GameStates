@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import google from '../img/google.jpeg';
 
 function Login() {
@@ -41,4 +42,9 @@ function Login() {
 	);
 }
 
+=======
+function Login() {
+	return <div>Login</div>;
+}
+>>>>>>> 8c0793a0b6dd9fb0945195af8f9e82aab2b9dde0
 export default Login;

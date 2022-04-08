@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -137,4 +138,9 @@ function Signup() {
 	);
 }
 
+=======
+function Signup() {
+	return <div>Signup</div>;
+}
+>>>>>>> 8c0793a0b6dd9fb0945195af8f9e82aab2b9dde0
 export default Signup;
