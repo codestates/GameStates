@@ -11,7 +11,6 @@ module.exports = {
                 }
             ],
         });
-
         console.log(a);
         res.send(a);
     },
