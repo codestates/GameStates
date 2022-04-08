@@ -1,14 +1,17 @@
-const {board,comment,user} = require('../models');
-
+const {user:User,comment:Comment, board:Board} = require('../models');
+ 
 module.exports = {
 
     getPost : async (req, res) => {
-        const a = await user.findOne({
+        const a = await User.findOne({
             where:{id:2},
             include:[
-                {model:comment}
-            ]
-        })
+                {
+                    model:Comment
+                }
+            ],
+        });
+
         console.log(a);
         res.send(a);
     },
