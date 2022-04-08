@@ -10,7 +10,7 @@ module.exports = {
             ]
         })
         console.log(a);
-        res.send(a);
+        res.send('asdasd');
     },
 
     writePost : (req, res) => {
