@@ -25,7 +25,7 @@ app.use('/user', userRouter);
 app.use('/comment', commentRouter);
 
 app.get('/', (req, res) => {
-  res.status(200).send('success');
+  res.status(200).send('Hello World');
 });
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 4000;

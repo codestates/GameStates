@@ -10,4 +10,12 @@ module.exports = {
 		'react/react-in-jsx-scope': 'off',
 		'import/no-unresolved': 'off',
 	},
+
+	settings: {
+		'import/resolver': {
+			node: {
+				paths: ['src'],
+			},
+		},
+	},
 };
