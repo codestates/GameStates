@@ -35,8 +35,7 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date()
     }
-
-    ]);
+  ]);
   },
   async down(queryInterface, Sequelize) {
     return queryInterface.bulkDelete('boards', null, {});
@@ -47,4 +46,4 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
   }
-};
+}

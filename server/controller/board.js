@@ -1,4 +1,4 @@
-const {user:User,comment:Comment} = require('../models');
+const {user:User,comment:Comment, board:Board} = require('../models');
  
 module.exports = {
 
@@ -6,9 +6,12 @@ module.exports = {
         const a = await User.findOne({
             where:{id:2},
             include:[
-                {model:Comment}
-            ]
-        })
+                {
+                    model:Comment
+                }
+            ],
+        });
+
         console.log(a);
         res.send(a);
     },

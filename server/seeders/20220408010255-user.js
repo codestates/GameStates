@@ -1,13 +1,13 @@
 'use strict';
 
 module.exports = {
-  async up (queryInterface, Sequelize) {
-     return queryInterface.bulkInsert('users', [{
+  async up(queryInterface, Sequelize) {
+    return queryInterface.bulkInsert('users', [{
       role: 0,
       email: 'example1@example.com',
       password: '',
       nickname: '잠만보',
-      postCount: 0,
+      postCount: 3,
       createdAt: new Date(),
       updatedAt: new Date()
     },
@@ -16,7 +16,7 @@ module.exports = {
       email: 'example2@example.com',
       password: '',
       nickname: '파이리',
-      postCount: 0,
+      postCount: 4,
       createdAt: new Date(),
       updatedAt: new Date()
     },
@@ -25,7 +25,7 @@ module.exports = {
       email: 'example3@example.com',
       password: '',
       nickname: '꼬북이',
-      postCount: 0,
+      postCount: 5,
       createdAt: new Date(),
       updatedAt: new Date()
     },
@@ -34,14 +34,14 @@ module.exports = {
       email: 'example4@example.com',
       password: '',
       nickname: '피카츄',
-      postCount: 0,
+      postCount: 2,
       createdAt: new Date(),
       updatedAt: new Date()
     }
-  ]);
+    ]);
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     return queryInterface.bulkDelete('users', null, {});
     /**
      * Add commands to revert seed here.

@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.board.hasMany(models.comment,{
+      models.board.hasMany(models.comment, {
         foreignKey: 'boardId'
       });
       models.board.belongsTo(models.user);
@@ -20,11 +20,13 @@ module.exports = (sequelize, DataTypes) => {
   board.init({
     title: DataTypes.STRING,
     description: DataTypes.STRING,
-    viewCount: DataTypes.INTEGER,
+    viewCount: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
     userId: DataTypes.INTEGER
   }, {
     sequelize,
-    freezeTableName:true,
     modelName: 'board',
   });
   return board;

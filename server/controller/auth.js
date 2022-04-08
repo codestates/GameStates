@@ -43,50 +43,61 @@ module.exports = {
     }
   },
 
-    googleLogin: (req, res) => {
-        // redirect to google login
-        return res.redirect(
-            `https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile&access_type=offline&response_type=code&state=state_parameter_passthrough_value&redirect_uri=${process.env.GOOGLE_REDIRECT_URI}&client_id=${process.env.GOOGLE_CLIENT_ID}`
-        )
-    },
+  googleLogin: (req, res) => {
+    // redirect to google login
+    return res.redirect(
+      `https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile&access_type=offline&response_type=code&state=state_parameter_passthrough_value&redirect_uri=${process.env.GOOGLE_REDIRECT_URI}&client_id=${process.env.GOOGLE_CLIENT_ID}`
+    )
+  },
 
-    googleCallback: async (req, res) => {
-        // authorization code
-        const { code } = req.query;
-        try {
-            // Exchange authorization code for refresh tokens and access tokens
-            const result = await axios.post(
-                `https://oauth2.googleapis.com/token?code=${code}&client_id=${process.env.GOOGLE_CLIENT_ID}&client_secret=${process.env.GOOGLE_CLIENT_SECRET}&redirect_uri=${process.env.GOOGLE_REDIRECT_URI}&grant_type=authorization_code`
-            );
-            // Calling Google APIs with access token
-            const userInfo = await axios.get(
-                `https://www.googleapis.com/oauth2/v2/userinfo?access_token=${result.data.access_token}`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${result.data.access_token}`,
-                    },
-                }
-            );
-            const user = await User.findOrCreate({
-                where: {
-                    email: userInfo.data.email
-                },
-                defaults: {
-                    email: userInfo.data.email,
-                    role: 0,
-                    password: '',
-                    nickname: userInfo.data.name,
-                }
-            });
-
-            console.log(user[0]);
-
-            res.redirect('http://localhost:4000');
-
-        } catch (error) {
-            res.sendStatus(500);
+  googleCallback: async (req, res) => {
+    // authorization code
+    // 어떤 정보(스코프)에 접근 가능한지가 담긴 코드
+    const authorizationCode = req.query.code;
+    try {
+      // Exchange authorization code for access token
+      let accessToken = await axios.post(
+        `https://oauth2.googleapis.com/token?code=${authorizationCode}&client_id=${process.env.GOOGLE_CLIENT_ID}&client_secret=${process.env.GOOGLE_CLIENT_SECRET}&redirect_uri=${process.env.GOOGLE_REDIRECT_URI}&grant_type=authorization_code`
+      );
+      accessToken = accessToken.data.access_token;
+      // Calling Google APIs with access token
+      const userInfo = await axios.get(
+        `https://www.googleapis.com/oauth2/v2/userinfo`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
         }
-    },
+      );
+      let user = await User.findOrCreate({
+        where: {
+          email: userInfo.data.email
+        },
+        defaults: {
+          email: userInfo.data.email,
+          password: '',
+          nickname: userInfo.data.name,
+        }
+      });
+
+      user = { ...user[0].dataValues };
+      delete user['password'];
+      // const accessToken = jwt.sign(user, process.env.ACCESS_SECRET, {expiresIn: '2d'});
+      // const refreshToken = jwt.sign(user, procee.env.REFRESH_SECRET, {expiresIn: '3d'});
+      // res.cookie('refreshToken',refreshToken).send({data: accessToken, messge: 'ok'});
+      // res.cookie('jwt', 'asd', {
+      //   sameSite: 'Strict',
+      //   secure: true,
+      //   httpOnly: true,
+      //   expires: new Date(Date.now() + 1000 * 60 * 60 * 48),
+      //   // domain: '.keyplus.kr',
+      // });
+      res.send(user);
+
+    } catch (error) {
+      res.sendStatus(500);
+    }
+  },
 
 
 }
