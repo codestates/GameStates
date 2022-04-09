@@ -1,6 +1,7 @@
 const dotenv = require("dotenv");
 dotenv.config();
 const { user } = require("../models");
+const { isAuthorized } = require('./tokenFunction');
 
 module.exports = {
   // API 문서 https://clout-tv.gitbook.io/api-docs-1/reference/api-reference/user-api

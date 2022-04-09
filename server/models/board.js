@@ -20,7 +20,10 @@ module.exports = (sequelize, DataTypes) => {
   board.init({
     title: DataTypes.STRING,
     description: DataTypes.STRING,
-    viewCount: DataTypes.INTEGER,
+    viewCount: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
     userId: DataTypes.INTEGER
   }, {
     sequelize,

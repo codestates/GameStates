@@ -24,7 +24,10 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     password: DataTypes.STRING,
     nickname: DataTypes.STRING,
-    postCount: DataTypes.INTEGER
+    postCount: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
   }, {
     sequelize,
     modelName: 'user',

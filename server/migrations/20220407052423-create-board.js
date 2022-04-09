@@ -15,7 +15,8 @@ module.exports = {
         type: Sequelize.STRING
       },
       viewCount: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
       },
       userId: {
         type: Sequelize.INTEGER
