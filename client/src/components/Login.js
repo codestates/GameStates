@@ -14,20 +14,17 @@ function Login() {
 	};
 
 	const handleLogin = () => {
-		const { userEmail, userPassword } = loginInfo;
-		if (!userEmail || !userPassword) {
+		const { email, password } = loginInfo;
+		if (!email || !password) {
 			setEmptyErrorMessage('이메일과 비밀번호를 입력하세요');
-		} else if (
-			loginInfo.email !== userEmail ||
-			loginInfo.password !== userPassword
-		) {
+		} else if (loginInfo.email !== email || loginInfo.password !== password) {
 			setInvalidErrorMessage(
 				'ID가 존재하지 않거나 비밀번호가 일치하지 않습니다 다시 시도해주세요',
 			);
 		} else {
 			axios
 				.post(
-					'http://localhost:4000/login',
+					'http://localhost:4000/auth/login',
 					{
 						...loginInfo,
 					},
