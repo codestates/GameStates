@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
 function Signup() {
@@ -64,11 +64,17 @@ function Signup() {
 			setErrorMessage('모든 항목은 필수입니다.');
 		} else {
 			axios
-				.post('http://localhost:4000/signup', {
-					userEmail,
-					userPassword,
-					userNickname,
-				})
+				.post(
+					'http://localhost:4000/signup',
+					{
+						userEmail,
+						userPassword,
+						userNickname,
+					},
+					{
+						withCredentials: true,
+					},
+				)
 				.then((response) => {
 					setErrorMessage(response.data);
 					navigate.push('/');
@@ -116,9 +122,14 @@ function Signup() {
 						</div>
 					</form>
 					<div className="btn-container">
+						<Link to="/login">
+							<button type="button" className="cancel_button">
+								취소
+							</button>
+						</Link>
 						<button
-							className="register_button"
 							type="submit"
+							className="register_button"
 							onClick={handleSignup}
 						>
 							계정 생성
@@ -126,9 +137,9 @@ function Signup() {
 					</div>
 					<div className="singup_go-to-login">
 						이미 회원이신가요?
-						<a href="/login" type="button" className="signup_go-to-login-btn">
-							로그인하기
-						</a>
+						<Link to="/login">
+							<span className="signup_go-to-login-btn">로그인하기</span>
+						</Link>
 						<div className="alert-box">{errorMessage}</div>
 					</div>
 				</div>

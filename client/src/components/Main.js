@@ -1,9 +1,7 @@
-import junGleNuNu from '../img/jungleNuNu.jpg';
-
 function Main() {
 	return (
 		<div className="main">
-			<img src={junGleNuNu} />
+			<img src={`${process.env.PUBLIC_URL}/img/jungleNuNu.jpg`} alt="main" />
 		</div>
 	);
 }

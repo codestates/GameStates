@@ -26,6 +26,9 @@
     .modal-view_body {
       height: 500px;
       margin: 50px;
+      .hide {
+        display: none;
+      }
       .simpleLogin_title {
         font-size: 16px;
         font-weight: 400;
@@ -122,13 +125,45 @@
           transition: 0.3s;
         }
       }
+      .login-invalid-message {
+        margin-top: 10px;
+        font-size: 15px;
+        color: red;
+        float: left;
+      }
+      .user-info-empty_alert-box {
+        text-align: center;
+        font-size: 14px;
+        color: red;
+        background-color: white;
+        border-color: #f3f5f7;
+        margin-top: 20px;
+        position: relative;
+        padding: 0.75rem 1.25rem;
+        margin-bottom: 1rem;
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+      }
+      .user-info-invalid_alert-box {
+        text-align: center;
+        font-size: 14px;
+        color: red;
+        background-color: white;
+        border-color: #f3f5f7;
+        margin-top: 20px;
+        position: relative;
+        padding: 0.75rem 1.25rem;
+        margin-bottom: 1rem;
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+      }
       .user_find-pw-btn {
         font-weight: 400;
         font-size: 14px;
         line-height: 20px;
         color: #ff5000;
         float: right;
-        margin-top: 40px;
+        margin-top: 20px;
       }
       .btn-container {
         text-align: center;
