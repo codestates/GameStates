@@ -1,4 +1,46 @@
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+
 function Login() {
+	const [loginInfo, setLoginInfo] = useState({
+		email: '',
+		password: '',
+	});
+	const [EmptyErrorMessage, setEmptyErrorMessage] = useState('');
+	const [invalidErroMessage, setInvalidErrorMessage] = useState('');
+	const handleInputValue = (key) => (e) => {
+		setLoginInfo({ ...loginInfo, [key]: e.target.value });
+	};
+
+	const handleLogin = () => {
+		const { userEmail, userPassword } = loginInfo;
+		if (!userEmail || !userPassword) {
+			setEmptyErrorMessage('이메일과 비밀번호를 입력하세요');
+		} else if (
+			loginInfo.email !== userEmail ||
+			loginInfo.password !== userPassword
+		) {
+			setInvalidErrorMessage(
+				'ID가 존재하지 않거나 비밀번호가 일치하지 않습니다 다시 시도해주세요',
+			);
+		} else {
+			axios
+				.post(
+					'http://localhost:4000/login',
+					{
+						...loginInfo,
+					},
+					{
+						withCredentials: true,
+					},
+				)
+				.then((response) => {
+					console.log('로그인 성공');
+				});
+		}
+	};
+
 	return (
 		<div className="modal-container">
 			<div className="modal-view-container">
@@ -9,7 +51,7 @@ function Login() {
 						<button className="simpleLogin_button" type="button">
 							<span className="google-button_inner">
 								<img
-									src={`${process.env.PUBLIC_URL} + /img/google.jpeg`}
+									src={`${process.env.PUBLIC_URL}/img/google.jpeg`}
 									className="google-button_img"
 									alt="google"
 								/>
@@ -19,22 +61,42 @@ function Login() {
 						<div className="login__l-or">OR</div>
 						<div className="emailLogin_title">이메일 로그인</div>
 						<form onSubmit={(e) => e.preventDefault()}>
-							<input type="email" placeholder="이메일 주소" />
-							<input type="password" placeholder="비밀번호" />
+							<input
+								type="email"
+								placeholder="이메일 주소"
+								onChange={handleInputValue('email')}
+							/>
+							<input
+								type="password"
+								placeholder="비밀번호"
+								onChange={handleInputValue('password')}
+							/>
+							<div className="user-info-empty_alert-box">
+								{EmptyErrorMessage}
+							</div>
+							<div className="user-info-invalid_alert-box">
+								{invalidErroMessage}
+							</div>
 						</form>
 						<span className="user_find-pw-btn">
-							<a href="/" className="user-link">
-								비밀번호를 잊으셨나요?
-							</a>
+							<Link to="/mypage">
+								<span className="user-link">비밀번호를 잊으셨나요?</span>
+							</Link>
 						</span>
 						<div className="btn-container">
-							<button type="submit" className="login_button">
+							<button
+								type="submit"
+								className="login_button"
+								onClick={handleLogin}
+							>
 								로그인
 							</button>
 						</div>
 						<div className="login__l-sign-up">
 							GameStates가 처음이세요?
-							<span className="login__signup_link">회원가입하기</span>
+							<Link to="/signup">
+								<span className="login__signup_link">회원가입하기</span>
+							</Link>
 						</div>
 					</div>
 				</div>

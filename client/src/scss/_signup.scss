@@ -91,13 +91,29 @@
         .register_button {
           margin-top: 50px;
           font-size: 16px;
-          border-radius: 10px;
           background-color: #dddfe4;
           color: white;
-          height: 50px;
-          width: 100%;
+          height: 56px;
+          width: 210px;
           font-family: 'Jua', sans-serif;
           font-weight: bold;
+          float: right;
+          cursor: pointer;
+          &:hover {
+            background-color: #ff5000;
+            transition: all 1s;
+          }
+        }
+        .cancel_button {
+          margin-top: 50px;
+          font-size: 16px;
+          background-color: #dddfe4;
+          color: white;
+          height: 56px;
+          width: 210px;
+          font-family: 'Jua', sans-serif;
+          font-weight: bold;
+          float: left;
           cursor: pointer;
           &:hover {
             background-color: #ff5000;
@@ -111,11 +127,13 @@
         font-weight: 400;
         font-size: 14px;
         line-height: 20px;
+        display: inline-block;
+        width: 100%;
         .signup_go-to-login-btn {
           font-weight: 400;
           font-size: 14px;
           line-height: 20px;
-          color: #1ea1f7;
+          color: #ff5000;
           margin-left: 12px;
         }
         .alert-box {
