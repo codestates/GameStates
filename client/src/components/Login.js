@@ -1,5 +1,3 @@
-import google from '../img/google.jpeg';
-
 function Login() {
 	return (
 		<div className="modal-container">
@@ -10,7 +8,11 @@ function Login() {
 						<div className="simpleLogin_title">간편 로그인</div>
 						<button className="simpleLogin_button" type="button">
 							<span className="google-button_inner">
-								<img src={google} className="google-button_img" alt="google" />
+								<img
+									src={`${process.env.PUBLIC_URL} + /img/google.jpeg`}
+									className="google-button_img"
+									alt="google"
+								/>
 								<span className="google-button_txt">Signup with Google</span>
 							</span>
 						</button>
