@@ -1,6 +1,8 @@
 /* eslint-disable import/no-unresolved */
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import Signup from './components/Signup';
 import Footer from './components/Footer';
 import Header from './components/Header';
@@ -12,6 +14,29 @@ import Board from './components/Board';
 import './scss/style.scss';
 
 function App() {
+	const [isLogin, setIsLogin] = useState(false);
+	const [accessToken, setAccessToken] = useState('');
+
+	useEffect(() => {
+		const url = new URL(window.location.href);
+		const authorization = url.searchParams.get('code');
+		if (authorization) {
+			google(authorization);
+		}
+	}, []);
+
+	function google(authorizationCode) {
+		axios
+			.post('http://localhost:4000/auth/google/callback', null, {
+				headers: {
+					authorization: authorizationCode,
+				},
+				withCredentials: true,
+			})
+			.then((result) => console.log(result));
+		// 액세스 토큰을 받아온다.
+	}
+
 	return (
 		<div>
 			<Header />

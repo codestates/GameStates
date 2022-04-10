@@ -65,7 +65,7 @@ function Signup() {
 		const password = userPassword;
 		const nickname = userNickname;
 
-		if (userEmail === '' || userPassword === '' || userNickname === '') {
+		if (!userEmail || !userPassword || !userNickname) {
 			setErrorMessage('모든 항목은 필수입니다.');
 		} else {
 			axios
@@ -80,10 +80,7 @@ function Signup() {
 						withCredentials: true,
 					},
 				)
-				.then((response) => {
-					// setErrorMessage(response.data);
-					navigate('/');
-				});
+				.then(() => navigate('/login'));
 		}
 	};
 
@@ -91,7 +88,9 @@ function Signup() {
 		<div className="modal-container">
 			<div className="modal-view">
 				<div className="modal-view_header">
-					<div className="modal-view_logo">Game States</div>
+					<Link to="/">
+						<div className="modal-view_logo">GameStates</div>
+					</Link>
 				</div>
 				<div className="modal-view_body">
 					<div className="signup_title">회원가입</div>
