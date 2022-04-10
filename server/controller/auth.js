@@ -15,10 +15,10 @@ module.exports = {
   login: async (req, res) => {
     const { email, password } = req.body;
 
-    // 암호화된 비밀번호 사용 시, password 제외, email로 유저를 찾기
+    //   // 암호화된 비밀번호 사용 시, password 제외, email로 유저를 찾기
     const User = await user.findOne({ where: { email } });
-    if (!User) {
-      return res.status(401).json({ message: "잘못된 정보를 입력하였습니다." });
+    if (!User || !bcrypt.compareSync(password, User.dataValues.password)) {
+      return res.json({ message: "잘못된 정보를 입력하였습니다." });
     } else {
       delete User.dataValues.password;
       // 토큰 function 생성하기
@@ -34,6 +34,22 @@ module.exports = {
         .json({ token: accessToken, message: "로그인 성공" });
     }
   },
+  // login: async (req, res) => {
+  //   const { email, password } = req.body;
+
+  //   if (!email || !password) {
+  //     return res.status(400).send("error");
+  //   }
+  //   try {
+  //     let user1 = await user.findOne({ where: { email, password } });
+  //     console.log(user1);
+  //     if (!user1) {
+  //       res.json("유저 정보 없음");
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // },
 
   logout: (req, res) => {
     // 토큰을 통해 인증된 사용자인지 확인 후 로그아웃 진행
@@ -82,7 +98,7 @@ module.exports = {
       // Calling Google APIs with access token
       // 이부분을 클라이언트가 가져가야 하는 건지?
       //근데 회원가입, 로그인이라 이 자체는 여기 있어도 되나?
-      //아니면 액세스 토큰을 이용해 클라이언트에서 직접 api호출하고, 클라이언트에서 정보 받아오면 
+      //아니면 액세스 토큰을 이용해 클라이언트에서 직접 api호출하고, 클라이언트에서 정보 받아오면
       //그정보를 서버로 전달해서 로그인이나 회원 가입을 요청하나?
       const userInfo = await axios.get(
         `https://www.googleapis.com/oauth2/v2/userinfo`,
