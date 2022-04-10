@@ -23,6 +23,10 @@ function Login() {
 		);
 	};
 
+	// 엔터키 누르면 로그인
+	const inputKeyPress = (e) => {
+		if (e.key === 'Enter') navigate('/');
+	};
 	// const handleLogin = () => {
 	// 	const { email, password } = loginInfo;
 	// 	if (!email || !password) {
@@ -124,6 +128,7 @@ function Login() {
 								type="submit"
 								className="login_button"
 								onClick={handleLogin}
+								onKeyPress={inputKeyPress}
 							>
 								로그인
 							</button>
