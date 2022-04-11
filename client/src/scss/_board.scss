@@ -1,0 +1,227 @@
+.wrap {
+    display: flex;
+    display: relative;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    touch-action: none;
+    .back {
+		position: absolute;
+        top: 0;
+        z-index: -101;
+		display: flex;
+		width: 100vw;
+        height: 30%;
+		padding: 0px;
+		overflow: hidden;
+        img {
+            width: 100%;
+            height: 30;
+            object-fit: cover;
+        }
+    }
+
+    .content{
+        width: 1320px;
+        .boardTitle {
+            display: flex;
+            width: 100%;
+            height: 50px;
+            padding: 40px 0px;
+            align-items: center;
+            justify-content: space-between;
+            p { float: left;
+                margin-left: 25%;
+                color: white;
+                font-size: 20px;
+            }
+        .searchInput {
+            width: 23%;
+            height: 40px;
+            float: right;
+            position: relative;
+            input {
+                border-radius: 2px;
+                background: #fff;
+                border: none;
+                width: 100%;
+                height: 100%;
+                font-size: 14px;
+                padding: 12px 62px 11px 12px;
+                box-sizing: border-box;
+            }
+                .searchButton {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    width: 25%;
+                    height: 71%;
+                    margin-top: 5px;
+                    margin-right: 6px;
+                    background: #ff5000;
+                    border-radius: 5px;
+                    text-decoration: none;
+                    color: #fff;
+                    border: none;
+                    cursor: pointer;
+
+                }
+            }
+    
+        }
+        
+        .inner {
+            position: relative;
+            display: flex;
+            width: 100%;
+            height: 700px;
+            background-color:transparent;
+            justify-content: space-between;
+            flex-direction: row;
+            .sidebar {
+                display: flex;
+                justify-content: space-between;
+
+                position: relative;
+                flex-direction: column;
+                background-color: transparent;
+                height: 71vh;
+                width: 22%;
+                float: left;
+
+                .mypage {
+                    display: flex;
+                    flex-direction: column;
+                    padding: 20px;
+                    width: 100%;
+                    height: 25%;
+                    justify-content: space-between;
+                    background-color:white;
+                    border: solid 1px rgba(0, 0, 0, 0.2);
+                    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.05);
+                    font-size: 15px;
+                    .postCountButton {
+                        float: right; 
+                        height: 40%;
+                        padding: 10px 20px; 
+                        border-radius: 5px; 
+                        text-decoration: none; 
+                        background: #ff5000;
+                        color: #fff;
+                        border: none;
+                        cursor: pointer;
+                    }
+
+                }
+
+                .menu {
+                    display: flex;
+                    flex-direction: column;
+                    padding: 20px;
+                    width: 100%;
+                    height: 66%;
+                    background-color:white;
+                    border: solid 1px rgba(0, 0, 0, 0.2);
+                    box-shadow: 5px 5px 5px 5px  rgba(0, 0, 0, 0.05);
+                    .menuTitle {
+                        padding-bottom: 10px;
+                    }
+                    .menuList {
+                        padding: 10px;
+                        border-bottom: solid 1px #ebeef1;
+                    }
+                }
+                
+            }
+            .article-list {
+                background-color: white;
+                // padding: 20px 40px 20px 40px;
+                border: solid 1px rgba(0, 0, 0, 0.2);
+                float: right;
+                width: 76%;
+                margin-right: 0;
+                box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.05);
+                
+    
+                .listItem {
+                    display: flex;
+                    position: relative;
+                    width: 100%;
+                    min-height: 69.6px;
+                    box-sizing: border-box;
+                    border-bottom: solid 1px #ebeef1;
+
+                    padding: 0;
+                    a {
+                        flex-direction: row;
+                        display: flex;
+                        width: 100%;
+                        justify-content: space-between;
+                        align-items: center;
+                        font-size:15px;
+                        &:hover {
+                            background-color: rgba(0, 0, 0, 0.05);
+                        }
+
+                        .id {
+                            margin-left:40px;
+                            width: 10%;
+                            text-align: left;
+                        }
+                        .title {
+                            width: 70%;
+
+                        }
+                        .createAt {
+                            margin-right:40px;
+
+                            width: 20%;
+                            text-align: right;
+
+                        }
+
+                    }
+
+   
+                }
+            }
+    
+        }
+    } 
+    .bottomBtm{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        .writeButton {
+            width: 100%;
+            border: none;
+            border-top: 1px solid #eee; 
+            padding: 20px 0px;
+            background-color: transparent;
+            a {
+                float: right; 
+                padding: 10px 20px; 
+                border-radius: 5px; 
+                text-decoration: none; 
+                background: #ff5000;
+                color: #fff;
+
+            }
+        }
+        .pagination {
+            float: left;
+            display: flex;
+            margin-left: 58%;
+            .pageBtn {
+                font-size: 15px;
+                width: 100%;
+                border: none;
+                border-top: 1px solid #eee; 
+                padding: 20px 0px;
+                background-color: transparent;
+                padding-right: 15px;
+                cursor: pointer;
+            }
+        }
+    }
+}

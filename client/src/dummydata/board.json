@@ -1,0 +1,166 @@
+{
+    "codes": [
+      {
+        "id": 1,
+        "value": "J",
+        "desc": "Journal"
+      },
+      {
+        "id": 2,
+        "value": "D",
+        "desc": "ToDo"
+      }
+    ],
+    "boards": [
+      {
+        "id": 1,
+        "name": "일기",
+        "insertDate": 1617351293396,
+        "updateDate": 1617351293396,
+        "code": "J"
+      },
+      {
+        "id": 2,
+        "name": "할일",
+        "insertDate": 1617351448578,
+        "updateDate": 1617351448578,
+        "code": "D"
+      }
+    ],
+    "articles": [
+      {
+        "id": 1,
+        "title": "배고프다",
+        "content": "배고프다",
+        "views": 19,
+        "insertDate": 1617351293396,
+        "updateDate": 1649637967065,
+        "boardId": 1
+      },
+      {
+        "id": 2,
+        "title": "내일 뭐 먹을지 정해야 함",
+        "content": "한식 중식 일식gg",
+        "views": 9,
+        "insertDate": 1617351448578,
+        "updateDate": 1649637868888,
+        "boardId": 2,
+        "updateData": 1649600423688
+      },
+      {
+        "title": "dd",
+        "content": "한식",
+        "boardId": "1",
+        "id": 3,
+        "views": 5,
+        "insertDate": 1649600290210,
+        "updateDate": 1649637973634
+      },
+      {
+        "boardId": "2",
+        "title": "치킨",
+        "content": "ㅇㅇ",
+        "id": 4,
+        "views": 1,
+        "insertDate": 1649637874231,
+        "updateDate": 1649637874262
+      },
+      {
+        "boardId": "2",
+        "title": "치킨",
+        "content": "ㅇㅇ",
+        "id": 5,
+        "views": 1,
+        "insertDate": 1649637874231,
+        "updateDate": 1649637874262
+      },
+      {
+        "boardId": "2",
+        "title": "뭐먹지",
+        "content": "ㅇㅇ",
+        "id": 6,
+        "views": 1,
+        "insertDate": 1649637874231,
+        "updateDate": 1649637874262
+      },
+      {
+        "boardId": "2",
+        "title": "떡볶이",
+        "content": "ㅇㅇ",
+        "id": 7,
+        "views": 1,
+        "insertDate": 1649637874231,
+        "updateDate": 1649637874262
+      },
+      {
+        "boardId": "2",
+        "title": "치킨",
+        "content": "ㅇㅇ",
+        "id": 8,
+        "views": 1,
+        "insertDate": 1649637874231,
+        "updateDate": 1649637874262
+      },
+      {
+        "id": 9,
+        "title": "치킨",
+        "content": "한식 중식 일식gg",
+        "views": 9,
+        "insertDate": 1617351448578,
+        "updateDate": 1649637868888,
+        "boardId": 2,
+        "updateData": 1649600423688
+      },
+      {
+        "id": 10,
+        "title": "내일 뭐 먹을지 정해야 함",
+        "content": "한식 중식 일식gg",
+        "views": 9,
+        "insertDate": 1617351448578,
+        "updateDate": 1649637868888,
+        "boardId": 2,
+        "updateData": 1649600423688
+      },
+      {
+        "id": 11,
+        "title": "내일 뭐 먹을지 정해야 함",
+        "content": "한식 중식 일식gg",
+        "views": 9,
+        "insertDate": 1617351448578,
+        "updateDate": 1649637868888,
+        "boardId": 2,
+        "updateData": 1649600423688
+      },
+      {
+        "id": 12,
+        "title": "내일 뭐 먹을지 정해야 함",
+        "content": "한식 중식 일식gg",
+        "views": 9,
+        "insertDate": 1617351448578,
+        "updateDate": 1649637868888,
+        "boardId": 2,
+        "updateData": 1649600423688
+      },
+      {
+        "id": 13,
+        "title": "내일 뭐 먹을지 정해야 함",
+        "content": "한식 중식 일식gg",
+        "views": 9,
+        "insertDate": 1617351448578,
+        "updateDate": 1649637868888,
+        "boardId": 2,
+        "updateData": 1649600423688
+      }
+  
+    ],
+    "comments": [
+      {
+        "id": 2,
+        "content": "내일 뭐먹음",
+        "boardId": 1,
+        "articleId": 1,
+        "insertDate": 1618385359793,
+        "updateDate": 1618385359793
+      }
+    ]
+  }

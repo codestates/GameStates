@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { IoIosArrowDropright, IoIosArrowDropleft } from 'react-icons/io';
 
-// const [currentIndex, setCurrentIndex] = useState(0);
 function MainTumbnail() {
 	const images = [
 		`${process.env.PUBLIC_URL}/img/jungleNuNu5.jpg`,
@@ -17,7 +16,7 @@ function MainTumbnail() {
 	const slideRef = useRef(null);
 	const nextSlide = () => {
 		if (currentSlide >= TOTAL_SLIDES) {
-			// 더 이상 넘어갈 슬라이드가 없으면 슬라이드를 초 ㄴ기화합니다.
+			// 더이상 넘어갈 수 없으면 슬라이드 초기화
 			setCurrentSlide(0);
 		} else {
 			setCurrentSlide(currentSlide + 1);
@@ -31,12 +30,9 @@ function MainTumbnail() {
 		}
 	};
 
-	console.log(currentSlide);
-	console.log(slideRef);
-
 	useEffect(() => {
 		slideRef.current.style.transition = 'all 0.5s ease-in-out';
-		slideRef.current.style.transform = `translateX(-${currentSlide}00vw)`; // 백틱을 사용하여 슬라이드로 이동하는 애니메이션을 만듭니다.
+		slideRef.current.style.transform = `translateX(-${currentSlide}00vw)`;
 	}, [currentSlide]);
 	return (
 		<section className="mainThumb">

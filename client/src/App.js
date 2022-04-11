@@ -8,7 +8,10 @@ import Main from './components/Main/Main';
 import Login from './components/Login';
 import Logout from './components/Logout';
 import Mypage from './components/Mypage';
-import Board from './components/Board';
+import Board from './components/Board/Board';
+import BoardRead from './components/Board/BoardRead';
+import BoardCreate from './components/Board/BoardCreate';
+import BoardList from './components/Board/BoardList';
 import './scss/style.scss';
 
 function App() {
@@ -21,7 +24,12 @@ function App() {
 				<Route path="/logout" element={<Logout />} />
 				<Route path="/mypage" element={<Mypage />} />
 				<Route path="/signup" element={<Signup />} />
-				<Route path="/Board" element={<Board />} />
+				<Route path="/board" element={<Board />} />
+			</Routes>
+			<Routes>
+				<Route path="/board/List" element={<BoardList />} />
+				<Route path="/board/create" element={<BoardCreate />} />
+				<Route path="/board/read/:id" element={<BoardRead />} />
 			</Routes>
 			<Footer />
 		</div>
