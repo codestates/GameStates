@@ -24,31 +24,30 @@ function Login() {
 	};
 
 	// 엔터키 누르면 로그인
-	const inputKeyPress = (e) => {
-		if (e.key === 'Enter') navigate('/');
-	};
-	// const handleLogin = () => {
+	// const inputKeyPress = (e) => {
 	// 	const { email, password } = loginInfo;
-	// 	if (!email || !password) {
-	// 		setErrorMessage('이메일과 비밀번호를 입력하세요');
-	// 	} else {
+	// 	if (e.key === 'Enter' || email.includes('@') || password.length >= 8) {
+	// 		if (!email || !password) {
+	// 			setErrorMessage('이메일과 비밀번호를 입력하세요');
+	// 			return;
+	// 		}
 	// 		axios
 	// 			.post(
 	// 				'http://localhost:4000/auth/login',
-	// 				{
-	// 					...loginInfo,
-	// 				},
-	// 				{
-	// 					withCredentials: true,
-	// 				},
+	// 				{ email, password },
+	// 				{ withCredentials: true },
 	// 			)
-	// 			.then((res) => {
-	// 				if (res.data.message === '잘못된 정보를 입력하였습니다.') {
+	// 			.then((result) => {
+	// 				if (result.data.message === '잘못된 정보를 입력하였습니다.') {
 	// 					setErrorMessage(
 	// 						'ID가 존재하지 않거나 비밀번호가 일치하지 않습니다 다시 시도해주세요',
 	// 					);
+	// 				} else {
+	// 					navigate('/');
 	// 				}
-	// 				navigate('/');
+	// 			})
+	// 			.catch((err) => {
+	// 				console.log(err);
 	// 			});
 	// 	}
 	// };
@@ -110,11 +109,13 @@ function Login() {
 								type="email"
 								placeholder="이메일 주소"
 								onChange={handleInputValue('email')}
+								// onKeyPress={inputKeyPress}
 							/>
 							<input
 								type="password"
 								placeholder="비밀번호"
 								onChange={handleInputValue('password')}
+								// onKeyPress={inputKeyPress}
 							/>
 							<div className="user-info-empty_alert-box">{errorMessage}</div>
 						</form>
@@ -128,7 +129,6 @@ function Login() {
 								type="submit"
 								className="login_button"
 								onClick={handleLogin}
-								onKeyPress={inputKeyPress}
 							>
 								로그인
 							</button>

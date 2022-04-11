@@ -1,7 +1,8 @@
 /* eslint-disable import/no-unresolved */
 import './App.css';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate, Switch } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+// import { Switch } from 'react-router-dom';
 import axios from 'axios';
 import Signup from './components/Signup';
 import Footer from './components/Footer';
@@ -14,8 +15,19 @@ import Board from './components/Board';
 import './scss/style.scss';
 
 function App() {
+	const navigate = useNavigate();
 	const [isLogin, setIsLogin] = useState(false);
+	const [loginInfo, setLoginInfo] = useState('');
 	const [accessToken, setAccessToken] = useState('');
+
+	// 서버 API 확인
+	// const handleLogout = () => {
+	// 	axios.post('http://localhost:4000/logout').then((res) => {
+	// 		setLoginInfo(null);
+	// 		setIsLogin(false);
+	// 		navigate('/');
+	// 	});
+	// };
 
 	useEffect(() => {
 		const url = new URL(window.location.href);
@@ -42,10 +54,10 @@ function App() {
 			<Header />
 			<Routes>
 				<Route exact path="/" element={<Main />} />
-				<Route path="/login" element={<Login />} />
-				<Route path="/logout" element={<Logout />} />
 				<Route path="/mypage" element={<Mypage />} />
+				<Route path="/login" element={<Login />} />
 				<Route path="/signup" element={<Signup />} />
+				<Route path="/logout" element={<Logout />} />
 				<Route path="/Board" element={<Board />} />
 			</Routes>
 			<Footer />
