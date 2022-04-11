@@ -17,12 +17,19 @@ module.exports = (sequelize, DataTypes) => {
   }
   comment.init({
     description: DataTypes.STRING,
-    boardId: DataTypes.INTEGER,
+    boardId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'board',
+        key: 'id'
+      },
+      onDelete: 'cascade',
+      onUpdate: 'cascade'
+    },
     userId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'comment',
-
   });
   return comment;
 };

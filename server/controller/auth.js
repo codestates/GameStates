@@ -22,7 +22,7 @@ module.exports = {
     } else {
       delete User.dataValues.password;
       // 토큰 function 생성하기
-      const accessToken = generateAccessToken(User.dataValues);
+      const accessToken = generateAccessToken(user.dataValues);
       // 토큰 생성 시 cookie에 담고, data: token 반환하기
       return res
         .status(201)
@@ -103,8 +103,18 @@ module.exports = {
           nickname: userInfo.data.name,
         },
       });
+      delete user1[0].dataValues.password;
+      const accessToken = generateAccessToken(user1[0].dataValues);
+      // 토큰 생성 시 cookie에 담고, data: token 반환하기
+      return res
+        .status(201)
+        .cookie("jwt", accessToken, {
+          sameSite: "None",
+          secure: true,
+          httpOnly: true,
+        })
+        .json({ token: accessToken, message: "로그인 성공" });
 
-      res.status(200).send(user1[0]);
     } catch (error) {
       res.sendStatus(500);
     }

@@ -1,28 +1,27 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('users', {
+    await queryInterface.createTable('comments', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      role: {
-        type: Sequelize.INTEGER
-      },
-      email: {
+      description: {
         type: Sequelize.STRING
       },
-      password: {
-        type: Sequelize.STRING
-      },
-      nickname: {
-        type: Sequelize.STRING
-      },
-      postCount: {
+      boardId: {
         type: Sequelize.INTEGER,
-        defaultValue: 0,
+        references:{
+          model : 'boards',
+          key: 'id'
+        },
+        onDelete:'cascade',
+        onUpdate:'cascade'
+      },
+      userId: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -35,6 +34,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('users');
+    await queryInterface.dropTable('comments');
   }
 };
