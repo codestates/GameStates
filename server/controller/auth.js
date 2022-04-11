@@ -17,7 +17,7 @@ module.exports = {
 
     // 암호화된 비밀번호 사용 시, password 제외, email로 유저를 찾기
     const User = await user.findOne({ where: { email } });
-    if (!User) {
+    if (!User || !bcrypt.compareSync(password, User.dataValues.password)) {
       return res.status(401).json({ message: "잘못된 정보를 입력하였습니다." });
     } else {
       delete User.dataValues.password;

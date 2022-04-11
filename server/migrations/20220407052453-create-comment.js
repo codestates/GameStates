@@ -12,7 +12,13 @@ module.exports = {
         type: Sequelize.STRING
       },
       boardId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references:{
+          model : 'boards',
+          key: 'id'
+        },
+        onDelete:'cascade',
+        onUpdate:'cascade'
       },
       userId: {
         type: Sequelize.INTEGER
