@@ -16,7 +16,7 @@ module.exports = {
       },
       viewCount: {
         type: Sequelize.INTEGER,
-        defaultValue: 0,
+        defaultValue:0,
       },
       userId: {
         type: Sequelize.INTEGER
