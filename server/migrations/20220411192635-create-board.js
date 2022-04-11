@@ -16,10 +16,15 @@ module.exports = {
       },
       viewCount: {
         type: Sequelize.INTEGER,
-        defaultValue:0,
+        defaultValue: 0,
       },
       userId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references:{
+          model : 'users',
+          key: 'id'
+        },
+        onDelete:'cascade',
       },
       createdAt: {
         allowNull: false,

@@ -22,7 +22,7 @@ module.exports = {
     } else {
       delete User.dataValues.password;
       // 토큰 function 생성하기
-      const accessToken = generateAccessToken(user.dataValues);
+      const accessToken = generateAccessToken(User.dataValues);
       // 토큰 생성 시 cookie에 담고, data: token 반환하기
       return res
         .status(201)
@@ -92,6 +92,7 @@ module.exports = {
           },
         }
       );
+      console.log(userInfo);
       const user1 = await user.findOrCreate({
         where: {
           email: userInfo.data.email,

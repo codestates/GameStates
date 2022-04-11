@@ -16,6 +16,28 @@ module.exports = {
     res.send(a);
   },
 
+  // writePost: async (req, res) => {
+  //   // 기본 작성 틀 완료, Token 이 없는 경우 작성 못하게 막기
+  //   // const userInfo = isAuthorized(req);
+  //   // console.log(userInfo); null 이 찍혀 나온다.
+  //   // userInfo 에 필요한 if else 지워둠
+  //   const userInfo = isAuthorized(req);
+  //   try {
+  //     if (userInfo) {
+  //       const { title, description } = req.body;
+  //       const isCreated = await board.create({
+  //         title,
+  //         description,
+  //         userId: userInfo.id,
+  //       });
+  //       if (isCreated) {
+  //         return res.status(201).json({ isCreated });
+  //       }
+  //     }
+  //   } catch (err) {
+  //     res.json({ message: "서버 에러" });
+  //   }
+  // },
   writePost: async (req, res) => {
     // 기본 작성 틀 완료, Token 이 없는 경우 작성 못하게 막기
     // const userInfo = isAuthorized(req);
@@ -35,7 +57,7 @@ module.exports = {
         }
       }
     } catch (err) {
-      res.json({ message: "서버 에러" });
+      res.status(500).json({ message: "서버 에러" });
     }
   },
 
