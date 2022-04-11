@@ -110,6 +110,7 @@ module.exports = {
           },
         }
       );
+      console.log(userInfo);
       const user1 = await user.findOrCreate({
         where: {
           email: userInfo.data.email,
