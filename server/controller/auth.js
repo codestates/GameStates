@@ -34,22 +34,6 @@ module.exports = {
         .json({ token: accessToken, message: "로그인 성공" });
     }
   },
-  // login: async (req, res) => {
-  //   const { email, password } = req.body;
-
-  //   if (!email || !password) {
-  //     return res.status(400).send("error");
-  //   }
-  //   try {
-  //     let user1 = await user.findOne({ where: { email, password } });
-  //     console.log(user1);
-  //     if (!user1) {
-  //       res.json("유저 정보 없음");
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // },
 
   logout: (req, res) => {
     // 토큰을 통해 인증된 사용자인지 확인 후 로그아웃 진행
