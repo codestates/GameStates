@@ -114,7 +114,6 @@ module.exports = {
           httpOnly: true,
         })
         .json({ token: accessToken, message: "로그인 성공" });
-
     } catch (error) {
       res.sendStatus(500);
     }

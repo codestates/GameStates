@@ -24,23 +24,51 @@ module.exports = {
     const userInfo = isAuthorized(req);
     try {
       if (userInfo) {
-        const { title, description, userId } = req.body;
-        await board.create({
+        const { title, description } = req.body;
+        const isCreated = await board.create({
           title,
           description,
           userId: userInfo.id,
         });
-        res.status(200).json({ message: "작성 완료" });
-      } else {
-        return res.status(400).json({ message: "로그인이 필요합니다." });
+        if (isCreated) {
+          return res.status(201).json({ isCreated });
+        }
       }
     } catch (err) {
-      res.status(500).json({ message: "서버 에러" });
+      res.json({ message: "서버 에러" });
     }
   },
 
   modifyPost: async (req, res) => {
     // if문을 통해, 로그인 했을 때, 작성 가능, else는 로그아웃 상태로 글 작성 불가능을 알려주자.
+    const userInfo = isAuthorized(req);
+    if (userInfo) {
+      try {
+        const { id } = req.params;
+        const existBoard = await board.findOne({
+          where: { id },
+        });
+        if (existBoard) {
+          const { title, description } = req.body;
+          if (userInfo.id === existBoard.dataValues.userId) {
+            await board.update(
+              {
+                title,
+                description,
+              },
+              {
+                where: { id },
+              }
+            );
+            return res.status(201).json({ message: "수정 완료" });
+          } else {
+            return res.status(401).json({ message: "유저 인증 필요" });
+          }
+        }
+      } catch (err) {
+        return res.status(500).json({ message: "서버 에러" });
+      }
+    }
   },
 
   deletePost: async (req, res) => {
@@ -53,7 +81,6 @@ module.exports = {
         });
         if (existBoard) {
           if (userInfo.id === existBoard.dataValues.userId) {
-            console.log(req.params);
             await board.destroy({ where: { id } });
             res.status(200).json({ message: "삭제 완료" });
           } else {
