@@ -1,0 +1,136 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #f3f5f7;
+  z-index: 100;
+  .container-view {
+    width: 50vw;
+    height: 75vh;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    .container-view_box {
+      margin: 70px;
+      height: 100%;
+      .container-view_title {
+        font-weight: 400;
+        font-size: 30px;
+        line-height: 1px;
+      }
+      .edit-table {
+        margin-top: 70px;
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+        border-top: 1px solid #e9edef;
+        .edit_tr {
+          display: table-row;
+          .edit_th {
+            display: table-cell;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 19px;
+            line-height: 1.5;
+            border-bottom: 1px solid #e9edef;
+            text-align: left;
+            color: #52595f;
+            width: 184px;
+            background-color: #f8f9fa;
+            border-right: 1px solid #e9edef;
+            height: 32px;
+            padding: 15px 10px 8px 16px;
+            vertical-align: top;
+          }
+          .edit_td {
+            padding: 8px 10px 8px 16px;
+            vertical-align: middle;
+            display: table-cell;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 19px;
+            line-height: 1.5;
+            border-bottom: 1px solid #e9edef;
+            text-align: left;
+            color: #52595f;
+            .edit-nickname-btn {
+              height: 25px;
+              width: 50px;
+              float: right;
+              &:hover {
+                cursor: pointer;
+              }
+            }
+          }
+        }
+      }
+      .save-btn {
+        display: block;
+        margin-top: 20px;
+        height: 40px;
+        width: 20%;
+        float: right;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      .user-delete {
+        margin-top: 100px;
+        font-weight: 400;
+        font-size: 30px;
+        line-height: 1px;
+      }
+      .user-delete_sub {
+        margin-top: 52px;
+        padding: 25px;
+        background-color: #f3f5f7;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        color: #52595f;
+        margin-bottom: 32px;
+        word-break: keep-all;
+      }
+      .container-checkbox {
+        margin-top: 24px;
+        position: relative;
+        input[type="checkbox"] {
+          position: absolute;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          border: 1px solid #999;
+          appearance: none;
+          cursor: pointer;
+          transition: background 0.2s;
+          &:focus {
+            outline: none;
+            background-color: #0dc790;
+            border: 1px solid #0dc790;
+            transition: 0.5s;
+          }
+        }
+        .checkbox-sub {
+          margin: 0;
+          display: block;
+          padding-left: 32px;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 24px;
+        }
+      }
+      .user-delete-btn {
+        margin-top: 25px;
+        height: 40px;
+        width: 20%;
+        float: right;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

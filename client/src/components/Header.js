@@ -27,6 +27,9 @@ function Header() {
 					<li>
 						<NavLink to="/Signup">Signup</NavLink>
 					</li>
+					<li>
+						<NavLink to="/Mypage">Mypage</NavLink>
+					</li>
 				</ul>
 				<button type="button" className="buggerBtn" onClick={openHandler}>
 					<NavLink to="#">{isOpen ? <FaBars /> : <HiOutlineX />}</NavLink>

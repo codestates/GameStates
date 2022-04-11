@@ -1,8 +1,8 @@
-const { isAuthorized } = require("./tokenFunction");
 const { comment: Comment } = require("../models");
+const { isAuthorized } = require("./tokenFunction");
 
 module.exports = {
-  // 내가 단 댓글도 불러오기도 있어야 하지 않을까??
+// 내가 단 댓글도 불러오기도 있어야 하지 않을까??
   writeComment: async (req, res) => {
     const { postId } = req.params; //이미 postId를 params로 받고 있는데 아래에서 board로 board_id를 받음
     const token = isAuthorized(req);

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
 function Login() {
@@ -7,48 +7,92 @@ function Login() {
 		email: '',
 		password: '',
 	});
-	const [EmptyErrorMessage, setEmptyErrorMessage] = useState('');
-	const [invalidErroMessage, setInvalidErrorMessage] = useState('');
+	const navigate = useNavigate();
+	const [errorMessage, setErrorMessage] = useState('');
+	// const [invalidErroMessage, setInvalidErrorMessage] = useState('');
 	const handleInputValue = (key) => (e) => {
 		setLoginInfo({ ...loginInfo, [key]: e.target.value });
 	};
 
+	const handleAuthLogin = () => {
+		window.location.assign(
+			`https://accounts.google.com/o/oauth2/v2/auth?scope=
+			https://www.googleapis.com/auth/userinfo.email+https://www.googleapis.com/auth/userinfo.profile
+			&access_type=offline&response_type=code&state=state_parameter_passthrough_value&
+			redirect_uri=${process.env.REACT_APP_GOOGLE_REDIRECT_URI}&client_id=${process.env.REACT_APP_GOOGLE_CLIENT_ID}`,
+		);
+	};
+
+	// 엔터키 누르면 로그인
+	// const inputKeyPress = (e) => {
+	// 	const { email, password } = loginInfo;
+	// 	if (e.key === 'Enter' || email.includes('@') || password.length >= 8) {
+	// 		if (!email || !password) {
+	// 			setErrorMessage('이메일과 비밀번호를 입력하세요');
+	// 			return;
+	// 		}
+	// 		axios
+	// 			.post(
+	// 				'http://localhost:4000/auth/login',
+	// 				{ email, password },
+	// 				{ withCredentials: true },
+	// 			)
+	// 			.then((result) => {
+	// 				if (result.data.message === '잘못된 정보를 입력하였습니다.') {
+	// 					setErrorMessage(
+	// 						'ID가 존재하지 않거나 비밀번호가 일치하지 않습니다 다시 시도해주세요',
+	// 					);
+	// 				} else {
+	// 					navigate('/');
+	// 				}
+	// 			})
+	// 			.catch((err) => {
+	// 				console.log(err);
+	// 			});
+	// 	}
+	// };
+
 	const handleLogin = () => {
-		const { userEmail, userPassword } = loginInfo;
-		if (!userEmail || !userPassword) {
-			setEmptyErrorMessage('이메일과 비밀번호를 입력하세요');
-		} else if (
-			loginInfo.email !== userEmail ||
-			loginInfo.password !== userPassword
-		) {
-			setInvalidErrorMessage(
-				'ID가 존재하지 않거나 비밀번호가 일치하지 않습니다 다시 시도해주세요',
-			);
-		} else {
-			axios
-				.post(
-					'http://localhost:4000/login',
-					{
-						...loginInfo,
-					},
-					{
-						withCredentials: true,
-					},
-				)
-				.then((response) => {
-					console.log('로그인 성공');
-				});
+		const { email, password } = loginInfo;
+		if (!email || !password) {
+			setErrorMessage('이메일과 비밀번호를 입력하세요');
+			return;
 		}
+		axios
+			.post(
+				'http://localhost:4000/auth/login',
+				{ email, password },
+				{ withCredentials: true },
+			)
+			.then((result) => {
+				console.log(result);
+				if (result.data.message === '잘못된 정보를 입력하였습니다.') {
+					setErrorMessage(
+						'ID가 존재하지 않거나 비밀번호가 일치하지 않습니다 다시 시도해주세요',
+					);
+				} else {
+					navigate('/');
+				}
+			})
+			.catch((err) => {
+				console.log(err);
+			});
 	};
 
 	return (
 		<div className="modal-container">
 			<div className="modal-view-container">
 				<div className="modal-view-header">
-					<div className="modal-view_logo">Game States</div>
+					<Link to="/">
+						<div className="modal-view_logo">GameStates</div>
+					</Link>
 					<div className="modal-view_body">
 						<div className="simpleLogin_title">간편 로그인</div>
-						<button className="simpleLogin_button" type="button">
+						<button
+							className="simpleLogin_button"
+							type="button"
+							onClick={handleAuthLogin}
+						>
 							<span className="google-button_inner">
 								<img
 									src={`${process.env.PUBLIC_URL}/img/google.jpeg`}
@@ -65,18 +109,15 @@ function Login() {
 								type="email"
 								placeholder="이메일 주소"
 								onChange={handleInputValue('email')}
+								// onKeyPress={inputKeyPress}
 							/>
 							<input
 								type="password"
 								placeholder="비밀번호"
 								onChange={handleInputValue('password')}
+								// onKeyPress={inputKeyPress}
 							/>
-							<div className="user-info-empty_alert-box">
-								{EmptyErrorMessage}
-							</div>
-							<div className="user-info-invalid_alert-box">
-								{invalidErroMessage}
-							</div>
+							<div className="user-info-empty_alert-box">{errorMessage}</div>
 						</form>
 						<span className="user_find-pw-btn">
 							<Link to="/mypage">

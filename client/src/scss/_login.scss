@@ -6,6 +6,8 @@
   height: 100vh;
   width: 100vw;
   background-color: #f3f5f7;
+  z-index: 100;
+  top: 0;
   .modal-view-container {
     width: 450px;
     height: 80vh;
@@ -39,7 +41,7 @@
         margin-top: 12px;
         width: 100%;
         font-size: 16px;
-        border-radius: 30px;
+        border-radius: 5px;
         display: inline-block;
         border: 0;
         height: 56px;
@@ -55,6 +57,7 @@
         line-height: 0;
       }
       .google-button_img {
+        // object-fit: cover;
         display: inline-block;
         margin-right: 16px;
         width: 24px;
@@ -163,17 +166,17 @@
         line-height: 20px;
         color: #ff5000;
         float: right;
-        margin-top: 20px;
+        margin-top: 10px;
       }
       .btn-container {
         text-align: center;
         .login_button {
           margin-top: 30px;
           font-size: 16px;
-          border-radius: 10px;
+          border-radius: 5px;
           background-color: #dddfe4;
           color: white;
-          height: 50px;
+          height: 56px;
           width: 100%;
           font-family: 'Jua', sans-serif;
           font-weight: bold;

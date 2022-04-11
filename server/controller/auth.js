@@ -16,12 +16,9 @@ module.exports = {
     const { email, password } = req.body;
 
     // 암호화된 비밀번호 사용 시, password 제외, email로 유저를 찾기
-    const User = await user.findOne({ where: { email } });
     try {
-      if (
-        !User ||
-        !bcrypt.compareSync(password, userInfo.dataValues.password)
-      ) {
+      const User = await user.findOne({ where: { email } });
+      if (!User || !bcrypt.compareSync(password, User.dataValues.password)) {
         return res.json({ message: "잘못된 정보를 입력하였습니다." });
       } else {
         delete User.dataValues.password;
@@ -46,11 +43,7 @@ module.exports = {
     // 토큰을 통해 인증된 사용자인지 확인 후 로그아웃 진행
     const userInfo = isAuthorized(req);
     try {
-      if (!userInfo) {
-        return res
-          .status(400)
-          .json({ message: "이미 로그아웃 된 상태입니다." });
-      } else {
+      if (userInfo) {
         return res
           .clearCookie("jwt", {
             sameSite: "None",
@@ -59,6 +52,10 @@ module.exports = {
           })
           .status(200)
           .json({ message: "로그아웃 성공" });
+      } else {
+        return res
+          .status(400)
+          .json({ message: "이미 로그아웃 된 상태입니다." });
       }
     } catch (err) {
       return res.status(500).json({ message: "서버 에러" });
@@ -124,8 +121,17 @@ module.exports = {
           nickname: userInfo.data.name,
         },
       });
-
-      res.status(200).send(user1[0]);
+      delete user1[0].dataValues.password;
+      const accessToken = generateAccessToken(user1[0].dataValues);
+      // 토큰 생성 시 cookie에 담고, data: token 반환하기
+      return res
+        .status(201)
+        .cookie("jwt", accessToken, {
+          sameSite: "None",
+          secure: true,
+          httpOnly: true,
+        })
+        .json({ token: accessToken, message: "로그인 성공" });
     } catch (error) {
       res.sendStatus(500);
     }
