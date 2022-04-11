@@ -16,7 +16,9 @@ module.exports = {
     });
     try {
       if (userInfo) {
-        return res.status(200).json({ data: userInfo });
+        return res.status(200).json({ data: userInfo, message: "확인 완료" });
+      } else {
+        return res.status(404).json({ message: "유저를 찾을 수 없습니다."});
       }
     } catch (err) {
       return res.status(500).json({ message: "서버 에러" });

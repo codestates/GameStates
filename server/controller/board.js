@@ -35,7 +35,7 @@ module.exports = {
         }
       }
     } catch (err) {
-      res.json({ message: "서버 에러" });
+      res.status(500).json({ message: "서버 에러" });
     }
   },
 
@@ -84,14 +84,12 @@ module.exports = {
             await board.destroy({ where: { id } });
             res.status(200).json({ message: "삭제 완료" });
           } else {
-            res.status(400).json({ message: "권한이 없습니다." });
+            res.status(401).json({ message: "권한이 없습니다." });
           }
         }
       } catch (err) {
         res.status(500).json({ message: "서버 에러" });
       }
-    } else {
-      return res.status(401).json({ message: "로그인 필요." });
     }
   },
 };
