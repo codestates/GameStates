@@ -23,35 +23,6 @@ function Login() {
 		);
 	};
 
-	// 엔터키 누르면 로그인
-	// const inputKeyPress = (e) => {
-	// 	const { email, password } = loginInfo;
-	// 	if (e.key === 'Enter' || email.includes('@') || password.length >= 8) {
-	// 		if (!email || !password) {
-	// 			setErrorMessage('이메일과 비밀번호를 입력하세요');
-	// 			return;
-	// 		}
-	// 		axios
-	// 			.post(
-	// 				'http://localhost:4000/auth/login',
-	// 				{ email, password },
-	// 				{ withCredentials: true },
-	// 			)
-	// 			.then((result) => {
-	// 				if (result.data.message === '잘못된 정보를 입력하였습니다.') {
-	// 					setErrorMessage(
-	// 						'ID가 존재하지 않거나 비밀번호가 일치하지 않습니다 다시 시도해주세요',
-	// 					);
-	// 				} else {
-	// 					navigate('/');
-	// 				}
-	// 			})
-	// 			.catch((err) => {
-	// 				console.log(err);
-	// 			});
-	// 	}
-	// };
-
 	const handleLogin = () => {
 		const { email, password } = loginInfo;
 		if (!email || !password) {

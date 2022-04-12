@@ -3,7 +3,7 @@ import { FaBars } from 'react-icons/fa';
 import { HiOutlineX } from 'react-icons/hi';
 import { useState } from 'react';
 
-function Header() {
+function Header({ isLogin, handleLogout }) {
 	const [isOpen, setOpen] = useState(true);
 	const openHandler = () => {
 		setOpen(!isOpen);
@@ -17,20 +17,31 @@ function Header() {
 				<h1 className="logo">
 					<NavLink to="/">GameStates</NavLink>
 				</h1>
-				<ul className="navMenu" onMouseUpCapture={openHandler}>
-					<li>
-						<NavLink to="/board">Board</NavLink>
-					</li>
-					<li>
-						<NavLink to="/Login">Login</NavLink>
-					</li>
-					<li>
-						<NavLink to="/Signup">Signup</NavLink>
-					</li>
-					<li>
-						<NavLink to="/Mypage">Mypage</NavLink>
-					</li>
-				</ul>
+				{isLogin ? (
+					<ul className="navMenu" onMouseUpCapture={openHandler}>
+						<li>
+							<NavLink to="/board">Board</NavLink>
+						</li>
+						<li>
+							<NavLink to="/">Logout</NavLink>
+						</li>
+					</ul>
+				) : (
+					<ul className="navMenu" onMouseUpCapture={openHandler}>
+						<li>
+							<NavLink to="/Mypage">Mypage</NavLink>
+						</li>
+						<li>
+							<NavLink to="/board">Board</NavLink>
+						</li>
+						<li>
+							<NavLink to="/Login">Login</NavLink>
+						</li>
+						<li>
+							<NavLink to="/Signup">Signup</NavLink>
+						</li>
+					</ul>
+				)}
 				<button type="button" className="buggerBtn" onClick={openHandler}>
 					<NavLink to="#">{isOpen ? <FaBars /> : <HiOutlineX />}</NavLink>
 				</button>

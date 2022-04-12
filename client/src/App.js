@@ -1,8 +1,7 @@
 /* eslint-disable import/no-unresolved */
 import './App.css';
-import { Route, Routes, useNavigate, Switch } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-// import { Switch } from 'react-router-dom';
 import axios from 'axios';
 import Signup from './components/Signup';
 import Footer from './components/Footer';
@@ -10,7 +9,8 @@ import Header from './components/Header';
 import Main from './components/Main/Main';
 import Login from './components/Login';
 import Logout from './components/Logout';
-import Mypage from './components/Mypage';
+import Mypage from './components/Mypage/Mypage';
+import MypageModal from './components/Mypage/MypageModal';
 import Board from './components/Board/Board';
 import BoardRead from './components/Board/BoardRead';
 import BoardCreate from './components/Board/BoardCreate';
@@ -20,17 +20,20 @@ import './scss/style.scss';
 function App() {
 	const navigate = useNavigate();
 	const [isLogin, setIsLogin] = useState(false);
-	const [loginInfo, setLoginInfo] = useState('');
+	const [loginInfo, setLoginInfo] = useState(null);
 	const [accessToken, setAccessToken] = useState('');
 
-	// 서버 API 확인
-	// const handleLogout = () => {
-	// 	axios.post('http://localhost:4000/logout').then((res) => {
-	// 		setLoginInfo(null);
-	// 		setIsLogin(false);
-	// 		navigate('/');
-	// 	});
-	// };
+	const handleLogout = () => {
+		axios.post('http://localhost:4000/auth/logout').then((res) => {
+			setLoginInfo(null);
+			setIsLogin(false);
+			navigate('/');
+		});
+	};
+
+	const issueAccessToken = (token) => {
+		setAccessToken(token);
+	};
 
 	useEffect(() => {
 		const url = new URL(window.location.href);
@@ -54,14 +57,18 @@ function App() {
 
 	return (
 		<div>
-			<Header />
+			<Header isLogin={isLogin} handleLogout={handleLogout} />
 			<Routes>
 				<Route exact path="/" element={<Main />} />
-				<Route path="/mypage" element={<Mypage />} />
+				<Route
+					path="/mypage"
+					element={<Mypage loginInfo={loginInfo} handleLogout={handleLogout} />}
+				/>
 				<Route path="/login" element={<Login />} />
-				<Route path="/signup" element={<Signup />} />
+				<Route path="/signup" element={<Signup isLogin={isLogin} />} />
 				<Route path="/logout" element={<Logout />} />
 				<Route path="/board" element={<Board />} />
+				<Route path="/mypagemodal" element={<MypageModal />} />
 			</Routes>
 			<Routes>
 				<Route path="/board/List" element={<BoardList />} />

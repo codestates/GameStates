@@ -12,7 +12,7 @@
 
 ### Project Team Member
 
-- 김도형 (Front-End): <address@example.com>
+- 김도형 (Front-End): <dobro92@gmail.com>
 - 김유정 (Front-End): <address@example.com>
 - 김세현 (Back-End): <address@example.com>
 - 이국진 (Back-End): <address@example.com>
