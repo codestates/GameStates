@@ -1,65 +1,62 @@
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100vw;
-  background-color: #f3f5f7;
-  z-index: 100;
-  .container-view {
-    width: 50vw;
-    height: 75vh;
-    background-color: #ffffff;
     display: flex;
-    flex-direction: column;
-    border-radius: 15px;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: #f3f5f7;
+  .container-view {
+      width: 50vw;
+      height: 80vh;
+      background-color: #ffffff;
+      border-radius: 15px;
     .container-view_box {
-      margin: 70px;
-      height: 100%;
+        margin: 50px;
+        height: 100%;
       .container-view_title {
-        font-weight: 400;
-        font-size: 30px;
-        line-height: 1px;
+          font-weight: 400;
+          font-size: 30px;
+          line-height: 1px;
       }
       .edit-table {
-        margin-top: 70px;
-        display: table;
-        width: 100%;
-        table-layout: fixed;
-        border-top: 1px solid #e9edef;
+          margin-top: 60px;
+          display: table;
+          width: 100%;
+          table-layout: fixed;
+          border-top: 1px solid #e9edef;
         .edit_tr {
-          display: table-row;
+            display: table-row;
           .edit_th {
-            display: table-cell;
-            font-weight: 400;
-            font-size: 16px;
-            line-height: 19px;
-            line-height: 1.5;
-            border-bottom: 1px solid #e9edef;
-            text-align: left;
-            color: #52595f;
-            width: 184px;
-            background-color: #f8f9fa;
-            border-right: 1px solid #e9edef;
-            height: 32px;
-            padding: 15px 10px 8px 16px;
-            vertical-align: top;
+              display: table-cell;
+              font-weight: 400;
+              font-size: 16px;
+              line-height: 19px;
+              line-height: 1.5;
+              border-bottom: 1px solid #e9edef;
+              text-align: left;
+              color: #52595f;
+              width: 184px;
+              background-color: #f8f9fa;
+              border-right: 1px solid #e9edef;
+              height: 32px;
+              padding: 15px 10px 8px 16px;
+              vertical-align: top;
           }
           .edit_td {
-            padding: 8px 10px 8px 16px;
-            vertical-align: middle;
-            display: table-cell;
-            font-weight: 400;
-            font-size: 16px;
-            line-height: 19px;
-            line-height: 1.5;
-            border-bottom: 1px solid #e9edef;
-            text-align: left;
-            color: #52595f;
+              padding: 8px 10px 8px 16px;
+              vertical-align: middle;
+              display: table-cell;
+              font-weight: 400;
+              font-size: 16px;
+              line-height: 19px;
+              line-height: 1.5;
+              border-bottom: 1px solid #e9edef;
+              text-align: left;
+              color: #52595f;
             .edit-nickname-btn {
-              height: 25px;
-              width: 50px;
-              float: right;
+                height: 25px;
+                width: 50px;
+                float: right;
               &:hover {
                 cursor: pointer;
               }
@@ -67,70 +64,205 @@
           }
         }
       }
-      .save-btn {
-        display: block;
+      .edit-btn {
+        display: inline-block;
         margin-top: 20px;
+        margin-left: 660px;
         height: 40px;
-        width: 20%;
-        float: right;
+        width: 10%;
+        border: 0;
         &:hover {
           cursor: pointer;
+          background-color: #ff5500;
         }
       }
-      .user-delete {
-        margin-top: 100px;
-        font-weight: 400;
-        font-size: 30px;
-        line-height: 1px;
+      .save-btn {
+          display: block;
+          margin-top: 20px;
+          height: 40px;
+          width: 10%;
+          float: right;
+          border: 0;
+        &:hover {
+            cursor: pointer;
+            background-color: #ff5500;
+        }
+      }
+      .user-delete_title {
+          margin-top: 70px;
+          font-weight: 400;
+          font-size: 30px;
+          line-height: 1px;
       }
       .user-delete_sub {
-        margin-top: 52px;
-        padding: 25px;
-        background-color: #f3f5f7;
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 20px;
-        color: #52595f;
-        margin-bottom: 32px;
-        word-break: keep-all;
+          margin-top: 52px;
+          padding: 25px;
+          background-color: #f3f5f7;
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 20px;
+          color: #52595f;
+          margin-bottom: 32px;
+          word-break: keep-all;
       }
       .container-checkbox {
-        margin-top: 24px;
-        position: relative;
+          margin-top: 24px;
+          position: relative;
         input[type="checkbox"] {
-          position: absolute;
-          width: 20px;
-          height: 20px;
-          border-radius: 50%;
-          border: 1px solid #999;
-          appearance: none;
-          cursor: pointer;
-          transition: background 0.2s;
-          &:focus {
-            outline: none;
-            background-color: #0dc790;
-            border: 1px solid #0dc790;
-            transition: 0.5s;
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 1px solid #999;
+            appearance: none;
+            cursor: pointer;
+            transition: background 0.2s;
+            &:focus {
+              outline: none;
+              background-color: #0dc790;
+              border: 1px solid #0dc790;
+              transition: 0.5s;
           }
         }
         .checkbox-sub {
-          margin: 0;
-          display: block;
-          padding-left: 32px;
-          font-weight: 400;
-          font-size: 16px;
-          line-height: 24px;
+            margin: 0;
+            display: block;
+            padding-left: 32px;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 24px;
         }
       }
       .user-delete-btn {
-        margin-top: 25px;
-        height: 40px;
-        width: 20%;
-        float: right;
-        &:hover {
-          cursor: pointer;
+          margin-top: 20px;
+          height: 40px;
+          width: 10%;
+          float: left;
+          border: 0;
+          &:hover {
+            background-color: #ff5500;
+            cursor: pointer;
         }
       }
     }
   }
+}
+
+.edit-container { 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  .edit-modal_backdrop {
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    .edit-modal_view {
+        width: 50%;
+        height: 40%;
+        background-color: white;
+        border-radius: 10px;
+        .hide {
+          display: none;
+        }
+        .edit-modal_body {
+          margin: 50px;
+          .edit-table {
+            margin-top: 60px;
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+            border-top: 1px solid #e9edef;
+          .edit_tr {
+            display: table-row;
+          .edit_th {
+              display: table-cell;
+              font-weight: 400;
+              font-size: 16px;
+              line-height: 19px;
+              line-height: 1.5;
+              border-bottom: 1px solid #e9edef;
+              text-align: left;
+              color: #52595f;
+              width: 184px;
+              background-color: #f8f9fa;
+              border-right: 1px solid #e9edef;
+              height: 32px;
+              padding: 15px 10px 8px 16px;
+              vertical-align: middle;
+            }
+          .edit_td {
+              padding: 8px 10px 8px 16px;
+              vertical-align: middle;
+              display: table-cell;
+              font-weight: 400;
+              font-size: 16px;
+              line-height: 19px;
+              line-height: 1.5;
+              border-bottom: 1px solid #e9edef;
+              text-align: left;
+              color: #52595f;
+              .edit-user-info {
+                margin-top: 5px;
+                border: 1px solid #e9edef;
+                width: 200px;
+                height: 30px;
+                font-size: 15px;
+                font-weight: 400;
+              }
+            .edit-nickname-btn {
+                height: 25px;
+                width: 50px;
+                float: right;
+              &:hover {
+                cursor: pointer;
+              }
+            }
+          }
+          .password-invalid-message {
+            margin-top: 10px;
+            font-size: 15px;
+            color: red;
+          }
+          .password-check-message {
+            margin-top: 10px;
+            font-size: 15px;
+            color: red;
+          }
+          .nickname-invalid-message {
+            margin-top: 10px;
+            font-size: 15px;
+            color: red;
+          }
+        }
+      }
+      .cancel-btn {
+        margin-top: 20px;
+        margin-left: 680px;
+        width: 80px;
+        height: 40px;
+        float: left;
+        border: 0;
+        &:hover {
+          cursor: pointer;
+          background-color: #ff5500;
+        }
+      }
+      .save-btn {
+        margin-top: 20px;
+        width: 80px;
+        height: 40px;
+        float: right;
+        border: 0;
+        &:hover {
+          cursor: pointer;
+          background-color: #ff5500;
+        }
+      }
+    }
+  }
+}
 }
