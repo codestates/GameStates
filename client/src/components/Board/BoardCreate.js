@@ -1,6 +1,4 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import moment from 'moment';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import 'moment/locale/ko';
 import { useState, useEffect, useRef } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';

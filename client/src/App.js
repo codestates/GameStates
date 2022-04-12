@@ -18,22 +18,42 @@ import BoardList from './components/Board/BoardList';
 import './scss/style.scss';
 
 function App() {
-	const navigate = useNavigate();
 	const [isLogin, setIsLogin] = useState(false);
-	const [loginInfo, setLoginInfo] = useState(null);
+	const [userInfo, setUserInfo] = useState(null);
 	const [accessToken, setAccessToken] = useState('');
+	const navigate = useNavigate();
 
-	const handleLogout = () => {
-		axios.post('http://localhost:4000/auth/logout').then((res) => {
-			setLoginInfo(null);
-			setIsLogin(false);
-			navigate('/');
-		});
+	const handleResponseSuccess = () => {
+		// console.log(accessToken);
+		setIsLogin(true);
 	};
 
 	const issueAccessToken = (token) => {
 		setAccessToken(token);
 	};
+
+	const handleLogout = () => {
+		axios
+			.post(
+				'http://localhost:4000/auth/logout',
+				null,
+				{
+					headers: { authorization: `Bearer ${accessToken}` },
+				},
+				{
+					withCredentials: true,
+				},
+			)
+			.then((res) => {
+				setUserInfo(null);
+				setIsLogin(false);
+				navigate('/');
+			});
+	};
+
+	useEffect(() => {
+		setIsLogin(false);
+	}, []);
 
 	useEffect(() => {
 		const url = new URL(window.location.href);
@@ -57,14 +77,26 @@ function App() {
 
 	return (
 		<div>
-			<Header isLogin={isLogin} handleLogout={handleLogout} />
+			<Header
+				isLogin={isLogin}
+				accessToken={accessToken}
+				handleLogout={handleLogout}
+			/>
 			<Routes>
 				<Route exact path="/" element={<Main />} />
 				<Route
 					path="/mypage"
-					element={<Mypage loginInfo={loginInfo} handleLogout={handleLogout} />}
+					element={<Mypage userInfo={userInfo} handleLogout={handleLogout} />}
 				/>
-				<Route path="/login" element={<Login />} />
+				<Route
+					path="/login"
+					element={
+						<Login
+							issueAccessToken={issueAccessToken}
+							handleResponseSuccess={handleResponseSuccess}
+						/>
+					}
+				/>
 				<Route path="/signup" element={<Signup isLogin={isLogin} />} />
 				<Route path="/logout" element={<Logout />} />
 				<Route path="/mypage" element={<Mypage />} />

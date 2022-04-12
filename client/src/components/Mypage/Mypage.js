@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import MypageModal from './MypageModal';
 
-function Mypage({ loginInfo, handleLogout }) {
+function Mypage({ userInfo, handleLogout }) {
 	return (
 		<div className="container">
 			<div className="container-view">
@@ -31,9 +31,11 @@ function Mypage({ loginInfo, handleLogout }) {
 							수정
 						</button>
 					</Link>
-					<button type="submit" className="save-btn">
-						저장
-					</button>
+					<Link to="/">
+						<button type="submit" className="save-btn">
+							저장
+						</button>
+					</Link>
 					<div className="user-delete_title">회원탈퇴</div>
 					<div className="user-delete_sub">
 						개인정보 및 개인화 서비스 이용기록이 모두 삭제 되며, 삭제된 데이터는

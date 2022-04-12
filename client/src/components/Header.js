@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
 import { HiOutlineX } from 'react-icons/hi';
 import { useState } from 'react';
+import axios from 'axios';
 
 function Header({ isLogin, handleLogout }) {
 	const [isOpen, setOpen] = useState(true);
@@ -10,6 +11,16 @@ function Header({ isLogin, handleLogout }) {
 		// eslint-disable-next-line no-console
 		console.log(isOpen);
 	};
+
+	// const handleLogout = () => {
+	// 	axios
+	// 		.post('http://localhost:4000/auth/logout', {
+	// 			withCredentials: true,
+	// 		})
+	// 		.then((res) => {
+	// 			console.log(res);
+	// 		});
+	// };
 
 	return (
 		<header className={isOpen ? null : 'active'}>
@@ -23,14 +34,16 @@ function Header({ isLogin, handleLogout }) {
 							<NavLink to="/board">Board</NavLink>
 						</li>
 						<li>
-							<NavLink to="/">Logout</NavLink>
+							<NavLink to="/Mypage">Mypage</NavLink>
+						</li>
+						<li>
+							<NavLink to="/" onClick={() => handleLogout()}>
+								Logout
+							</NavLink>
 						</li>
 					</ul>
 				) : (
 					<ul className="navMenu" onMouseUpCapture={openHandler}>
-						<li>
-							<NavLink to="/Mypage">Mypage</NavLink>
-						</li>
 						<li>
 							<NavLink to="/board">Board</NavLink>
 						</li>

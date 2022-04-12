@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
-function Login() {
+function Login({ handleResponseSuccess, issueAccessToken }) {
 	const [loginInfo, setLoginInfo] = useState({
 		email: '',
 		password: '',
@@ -36,12 +36,14 @@ function Login() {
 				{ withCredentials: true },
 			)
 			.then((result) => {
-				console.log(result);
+				// console.log(result);
 				if (result.data.message === '잘못된 정보를 입력하였습니다.') {
 					setErrorMessage(
 						'ID가 존재하지 않거나 비밀번호가 일치하지 않습니다 다시 시도해주세요',
 					);
 				} else {
+					handleResponseSuccess();
+					issueAccessToken(result.data.token);
 					navigate('/');
 				}
 			})
