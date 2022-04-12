@@ -4,21 +4,22 @@ import axios from 'axios';
 import BoardComment from './BoardComment';
 import BoardSidebar from './BoardSidebar';
 
-function BoardRead() {
+function BoardRead({ accessToken }) {
 	const [read, setRead] = useState([]);
 	const { id } = useParams();
 	const navigate = useNavigate();
+	const [posts, setPosts] = useState([]);
 
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
 				const response = await axios({
 					method: 'get',
-					url: `http://localhost:4003/articles/${id}`,
-					baseURL: 'http://localhost:4003/articles',
+					url: `http://localhost:4000/board/${id}`,
+					baseURL: 'http://localhost:4000/board/',
 					timeout: 2000,
 				});
-				setRead(response.data);
+				setRead(response.data.isCreated);
 			} catch (error) {
 				console.error(error);
 			}
@@ -26,22 +27,24 @@ function BoardRead() {
 
 		fetchData();
 	}, []);
+	console.log(read);
 
-	const [posts, setPosts] = useState([]);
+	// const getBoardList = async () => {
+	// 	await axios
+	// 		.get(`http://localhost:4000/board/`)
+	// 		.then((res) => setPosts(res.data.data));
+	// };
 
-	const getBoardList = async () => {
-		await axios
-			.get(`http://localhost:4003/articles`)
-			.then((res) => setPosts(res.data));
-	};
-
-	useEffect(() => {
-		getBoardList();
-	}, []);
+	// useEffect(() => {
+	// 	getBoardList();
+	// }, []);
 
 	const del = () => {
 		axios
-			.delete(`http://localhost:4003/articles/${id}`)
+			.delete(`http://localhost:4000/board/${id}`, {
+				headers: { authorization: `Bearer ${accessToken}` },
+				withCredentials: true,
+			})
 			.then(() => alert('게시판 삭제가 완료 되었습니다'))
 			.then(() => navigate('/board'));
 	};
@@ -50,10 +53,7 @@ function BoardRead() {
 	const [postsPerPage] = useState(10);
 	const indexOfLastPost = currentPage * postsPerPage;
 	const indexOfFirstPost = indexOfLastPost - postsPerPage;
-	const currentPosts = posts
-		.sort((a, b) => b.id - a.id)
-		.slice(indexOfFirstPost, indexOfLastPost);
-	const paginate = (pageNumber) => setCurrentPage(pageNumber);
+	const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
 	// 검색 구현
 	const [search, setSearch] = useState('');
@@ -73,7 +73,6 @@ function BoardRead() {
 			setPosts(filterData);
 		}
 	};
-	console.log(posts);
 
 	return (
 		<div className="wrap">
@@ -104,8 +103,8 @@ function BoardRead() {
 							<div className="boardHeader">
 								<div className="boardReadTitle">{read.title}</div>
 								<div className="boardReadTitleSub">
-									<div className="boardName">{read.name}</div>
-									<div className="createdAt">{read.insertDate}</div>
+									<div className="boardName">{read.title}</div>
+									<div className="createdAt">{read.createdAt}</div>
 								</div>
 								<div className="boardReadTitleBtn">
 									<button type="button" onClick={del} className="delButton">
@@ -116,7 +115,7 @@ function BoardRead() {
 									</button>
 								</div>
 							</div>
-							<div className="boardReadContent">{read.content}</div>
+							<div className="boardReadContent">{read.description}</div>
 							<BoardComment currentPosts={currentPosts} />
 						</div>
 					</div>

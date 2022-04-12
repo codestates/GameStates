@@ -1,99 +1,94 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import moment from 'moment';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import 'moment/locale/ko';
 import { useState, useEffect, useRef } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import BoardSidebar from './BoardSidebar';
 
-function BoardCreate() {
+function BoardCreate({ accessToken }) {
 	const titleRef = useRef(null);
 	const contentRef = useRef(null);
 	const navigate = useNavigate();
-	const [read, setRead] = useState([]);
-	const { id } = useParams();
 	const nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
-	console.log(nowTime);
-
-	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const response = await axios({
-					method: 'get',
-					url: `http://localhost:4003/articles/${id}`,
-					baseURL: 'http://localhost:4003/articles',
-					timeout: 2000,
-				});
-				setRead(response.data);
-			} catch (error) {
-				console.error(error);
-			}
-		};
-
-		fetchData();
-	}, []);
+	const [posts, setPosts] = useState([]);
 
 	const onSubmit = (e) => {
 		e.preventDefault();
 	};
-
-	const [posts, setPosts] = useState([]);
+	console.log(accessToken);
 
 	const getBoardList = async () => {
 		await axios
-			.get(`http://localhost:4003/articles`)
-			.then((res) => setPosts(res.data));
+			.get(`http://localhost:4000/board`)
+			.then((res) => setPosts(res.data.data));
 	};
 
 	useEffect(() => {
 		getBoardList();
 	}, []);
 
-	const [currentPage, setCurrentPage] = useState(1);
-	const [postsPerPage] = useState(10);
-	const indexOfLastPost = currentPage * postsPerPage;
-	const indexOfFirstPost = indexOfLastPost - postsPerPage;
-	const currentPosts = posts
-		.sort((a, b) => b.id - a.id)
-		.slice(indexOfFirstPost, indexOfLastPost);
-	const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-	// 검색 구현
-	const [search, setSearch] = useState('');
-	const onChangeSearch = (e) => {
-		e.preventDefault();
-		setSearch(e.target.value);
-	};
-	const onSerach = (e) => {
-		e.preventDefault();
-		if (search === null || search === '') {
-			axios
-				.get(`http://localhost:4003/articles`)
-				.then((res) => setPosts(res.data));
-		} else {
-			const filterData = posts.filter((el) => el.title.includes(search));
-			console.log(filterData);
-			setPosts(filterData);
-		}
-	};
-	console.log(posts);
+	// // 검색 구현
+	// const [search, setSearch] = useState('');
+	// const onChangeSearch = (e) => {
+	// 	e.preventDefault();
+	// 	setSearch(e.target.value);
+	// };
+	// const onSerach = (e) => {
+	// 	e.preventDefault();
+	// 	if (search === null || search === '') {
+	// 		axios
+	// 			.get(`http://localhost:4003/articles`)
+	// 			.then((res) => setPosts(res.data));
+	// 	} else {
+	// 		const filterData = posts.filter((el) => el.title.includes(search));
+	// 		setPosts(filterData);
+	// 	}
+	// };
 
 	const axiosPost = () => {
 		axios
 			.post(
-				'http://localhost:4003/articles',
+				'http://localhost:4000/board',
 				{
 					title: titleRef.current.value,
-					content: contentRef.current.value,
-					insertDate: nowTime,
-					name: '유정',
+					description: contentRef.current.value,
 				},
 				{
+					headers: { authorization: `Bearer ${accessToken}` },
 					withCredentials: true,
 				},
 			)
 			.then(() => alert('게시판 등록이 완료 되었습니다'))
 			.then(() => navigate('/board'));
 	};
+
+	// const axiosPost = () => {
+	// 	const { postData } = {
+	// 		title: titleRef.current.value,
+	// 		escription: contentRef.current.value,
+	// 	};
+	// 	axios
+	// 		.post(
+	// 			`http://localhost:4000/board`,
+	// 			postData,
+	// 			{
+	// 				headers: {
+	// 					'Content-type': 'application/json',
+	// 				},
+	// 			},
+	// 			// {
+	// 			//     title: titleRef.current.value,
+	// 			//     description: contentRef.current.value,
+	// 			// },
+	// 			{
+	// 				withCredentials: true,
+	// 			},
+	// 		)
+	// 		.then(() => alert('게시판 등록이 완료 되었습니다'))
+	// 		.then(() => navigate('/board'));
+	// };
 
 	return (
 		<div className="wrap">
@@ -104,14 +99,8 @@ function BoardCreate() {
 			<div className="content">
 				<div className="boardTitle">
 					<p>Board </p>
-					<form className="searchInput" onsSubmit={onSerach}>
-						<input
-							type="text"
-							name="search"
-							value={search}
-							placeholder="검색하세요"
-							onChange={onChangeSearch}
-						/>
+					<form className="searchInput">
+						<input type="text" name="search" placeholder="검색하세요" />
 						<button type="submit" className="searchButton">
 							Go
 						</button>

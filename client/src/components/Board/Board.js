@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useParams, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import BoardList from './BoardList';
 import BoardSidebar from './BoardSidebar';
@@ -10,23 +10,15 @@ function Board() {
 
 	const getBoardList = async () => {
 		await axios
-			.get(`http://localhost:4003/articles`)
-			.then((res) => setPosts(res.data));
+			.get(`http://localhost:4000/board`)
+			.then((res) => setPosts(res.data.data));
 	};
+	console.log(posts);
 
 	useEffect(() => {
 		getBoardList();
 	}, []);
-
-	// const getRead = async () => {
-	// 	await axios
-	// 		.get(`http://localhost:4003/articles?id=${id}`)
-	// 		.then((res) => setRead(res.data));
-	// };
-
-	// useEffect(() => {
-	// 	getRead();
-	// }, [read]);
+	console.log(getBoardList);
 
 	// pagenation 구현
 	const [currentPage, setCurrentPage] = useState(1);
@@ -52,11 +44,9 @@ function Board() {
 				.then((res) => setPosts(res.data));
 		} else {
 			const filterData = posts.filter((el) => el.title.includes(search));
-			console.log(filterData);
 			setPosts(filterData);
 		}
 	};
-	console.log(posts);
 
 	return (
 		<div className="wrap">

@@ -106,8 +106,14 @@ function App() {
 			</Routes>
 			<Routes>
 				<Route path="/board/List" element={<BoardList />} />
-				<Route path="/board/create" element={<BoardCreate />} />
-				<Route path="/board/read/:id" element={<BoardRead />} />
+				<Route
+					path="/board/create"
+					element={<BoardCreate accessToken={accessToken} />}
+				/>
+				<Route
+					path="/board/read/:id"
+					element={<BoardRead accessToken={accessToken} />}
+				/>
 			</Routes>
 			<Footer />
 		</div>

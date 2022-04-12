@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import BoardCreate from './BoardCreate';
 
 function BoardList({ currentPosts }) {
 	return (
@@ -11,7 +10,7 @@ function BoardList({ currentPosts }) {
 						<Link to={`/board/read/${item.id}`}>
 							<div className="title">{item.title}</div>
 							<div className="name">{item.name}</div>
-							<div className="createAt">{item.insertDate}</div>
+							<div className="createAt">{item.createdAt}</div>
 						</Link>
 					</div>
 				);

@@ -1,4 +1,4 @@
-const { board } = require("../models");
+const { board, user, comment } = require("../models");
 const { isAuthorized } = require("../controller/tokenFunction");
 // const { where } = require("sequelize/types");
 
