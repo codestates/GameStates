@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams, Route } from 'react-router-dom';
 import axios from 'axios';
-import BoardComment from './BoardComment';
+import BoardList from './BoardList';
 import BoardSidebar from './BoardSidebar';
+import Pagination from './Pagination';
 
-function BoardRead() {
+function BoardCreate() {
 	const [read, setRead] = useState([]);
 	const { id } = useParams();
-	const navigate = useNavigate();
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -27,6 +27,26 @@ function BoardRead() {
 		fetchData();
 	}, []);
 
+	const axiosPost = () => {
+		axios
+			.post(
+				'http://localhost:4003/articles',
+				{
+					title: titleRef.current.value,
+					content: contentRef.current.value,
+				},
+				{
+					withCredentials: true,
+				},
+			)
+			.then(() => alert('게시판 등록이 완료 되었습니다'))
+			.then(() => navigate('/board'));
+	};
+
+	const onSubmit = (e) => {
+		e.preventDefault();
+	};
+
 	const [posts, setPosts] = useState([]);
 
 	const getBoardList = async () => {
@@ -39,12 +59,17 @@ function BoardRead() {
 		getBoardList();
 	}, []);
 
-	const del = () => {
-		axios
-			.delete(`http://localhost:4003/articles/${id}`)
-			.then(() => alert('게시판 삭제가 완료 되었습니다'))
-			.then(() => navigate('/board'));
-	};
+	// const getRead = async () => {
+	// 	await axios
+	// 		.get(`http://localhost:4003/articles?id=${id}`)
+	// 		.then((res) => setRead(res.data));
+	// };
+
+	// useEffect(() => {
+	// 	getRead();
+	// }, [read]);
+
+	// pagenation 구현
 
 	const [currentPage, setCurrentPage] = useState(1);
 	const [postsPerPage] = useState(10);
@@ -100,28 +125,19 @@ function BoardRead() {
 				<div className="inner">
 					<BoardSidebar boardData={posts} />
 					<div className="article-list">
-						<div className="boardRead">
-							<div className="boardHeader">
-								<div className="boardReadTitle">{read.title}</div>
-								<div className="boardReadTitleSub">
-									<div className="boardName">{read.name}</div>
-									<div className="createdAt">{read.insertDate}</div>
-								</div>
-								<div className="boardReadTitleBtn">
-									<button type="button" onClick={del} className="delButton">
-										삭제
-									</button>
-									<button type="button" onClick={del} className="putButton">
-										수정
-									</button>
-								</div>
-							</div>
-							<div className="boardReadContent">{read.content}</div>
-							<BoardComment currentPosts={currentPosts} />
-						</div>
+						<div>{read.id}</div>
+						<div>{read.title}</div>
+						<div>{read.content}</div>
+						<div>{read.insertDate}</div>{' '}
 					</div>
 				</div>
 				<div className="bottomBtm">
+					<Pagination
+						postsPerPage={postsPerPage}
+						totalPosts={posts.length}
+						currentPage={currentPage}
+						paginate={paginate}
+					/>
 					<button type="button" className="writeButton">
 						<Link to="/board/create">글쓰기</Link>
 					</button>
