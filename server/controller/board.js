@@ -1,19 +1,27 @@
-const { board, comment, user } = require("../models");
+const { board } = require("../models");
 const { isAuthorized } = require("../controller/tokenFunction");
 
 module.exports = {
-  getPost: async (req, res) => {
-    const a = await board.findOne({
-      where: { id: 2 },
-      include: [
-        {
-          model: comment,
-          include: [{ model: user }],
-        },
-      ],
-    });
-    console.log(a);
-    res.send(a);
+
+  getAllPost: async (req, res) => {
+    try {
+      const posts = await board.findAll({
+        order: [['createdAt','DESC']]
+      });
+      return res.json({ data: posts, message: "success" });
+    }
+    catch (err) {
+      return res.status(500).json({ message: "서버 에러" });
+    }
+    // const a = await user.findOne({
+    //   where: { id: 2 },
+    //   include: [
+    //     {
+    //       model: comment,
+    //       include: [{ model: board }],
+    //     },
+    //   ],
+    // });
   },
 
   writePost: async (req, res) => {
@@ -35,7 +43,7 @@ module.exports = {
         }
       }
     } catch (err) {
-      res.json({ message: "서버 에러" });
+      res.status(500).json({ message: "서버 에러" });
     }
   },
 
@@ -61,13 +69,13 @@ module.exports = {
               }
             );
             return res.status(201).json({ message: "수정 완료" });
-          } else {
-            return res.status(401).json({ message: "유저 인증 필요" });
           }
         }
       } catch (err) {
         return res.status(500).json({ message: "서버 에러" });
       }
+    } else {
+      return res.status(401).json({ message: "유저 인증 필요" });
     }
   },
 
@@ -83,15 +91,13 @@ module.exports = {
           if (userInfo.id === existBoard.dataValues.userId) {
             await board.destroy({ where: { id } });
             res.status(200).json({ message: "삭제 완료" });
-          } else {
-            res.status(400).json({ message: "권한이 없습니다." });
           }
         }
       } catch (err) {
         res.status(500).json({ message: "서버 에러" });
       }
     } else {
-      return res.status(401).json({ message: "로그인 필요." });
+      res.status(401).json({ message: "권한이 없습니다." });
     }
   },
 };

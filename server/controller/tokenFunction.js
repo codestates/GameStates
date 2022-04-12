@@ -10,6 +10,9 @@ module.exports = {
   },
   isAuthorized: (req) => {
     const Authorization = req.headers.authorization;
+    if(!Authorization){
+      return null;
+    }
     const token = Authorization.split(" ")[1];
     if (!token) {
       return null;

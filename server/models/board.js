@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      models.board.hasMany(models.comment,{
-      });
+      // define association here
+      models.board.hasMany(models.comment);
       models.board.belongsTo(models.user);
     }
   }
@@ -22,7 +22,14 @@ module.exports = (sequelize, DataTypes) => {
       type :DataTypes.INTEGER,
       defaultValue: 0,
     },
-    userId: DataTypes.INTEGER
+    userId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'user',
+        key: 'id'
+      },
+      onDelete: 'cascade',
+    }
   }, {
     sequelize,
     modelName: 'board',
