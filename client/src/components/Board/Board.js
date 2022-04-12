@@ -33,8 +33,30 @@ function Board() {
 	const [postsPerPage] = useState(10);
 	const indexOfLastPost = currentPage * postsPerPage;
 	const indexOfFirstPost = indexOfLastPost - postsPerPage;
-	const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+	const currentPosts = posts
+		.sort((a, b) => b.id - a.id)
+		.slice(indexOfFirstPost, indexOfLastPost);
 	const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+	// 검색 구현
+	const [search, setSearch] = useState('');
+	const onChangeSearch = (e) => {
+		e.preventDefault();
+		setSearch(e.target.value);
+	};
+	const onSerach = (e) => {
+		e.preventDefault();
+		if (search === null || search === '') {
+			axios
+				.get(`http://localhost:4003/articles`)
+				.then((res) => setPosts(res.data));
+		} else {
+			const filterData = posts.filter((el) => el.title.includes(search));
+			console.log(filterData);
+			setPosts(filterData);
+		}
+	};
+	console.log(posts);
 
 	return (
 		<div className="wrap">
@@ -45,16 +67,22 @@ function Board() {
 			<div className="content">
 				<div className="boardTitle">
 					<p>Board </p>
-					<div className="searchInput">
-						<input type="text" name="userName" placeholder="검색하세요" />
-						<button type="button" className="searchButton">
+					<form className="searchInput" onsSubmit={onSerach}>
+						<input
+							type="text"
+							name="search"
+							value={search}
+							placeholder="검색하세요"
+							onChange={onChangeSearch}
+						/>
+						<button type="submit" className="searchButton">
 							Go
 						</button>
-					</div>
+					</form>
 				</div>
 				<div className="inner">
 					<BoardSidebar boardData={posts} />
-					<BoardList boardListData={posts} currentPosts={currentPosts} />
+					<BoardList currentPosts={currentPosts} />
 				</div>
 				<div className="bottomBtm">
 					<Pagination
@@ -64,7 +92,7 @@ function Board() {
 						paginate={paginate}
 					/>
 					<button type="button" className="writeButton">
-						<Link to="/board/write">글쓰기</Link>
+						<Link to="/board/create">글쓰기</Link>
 					</button>
 				</div>
 			</div>

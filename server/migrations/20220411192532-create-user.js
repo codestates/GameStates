@@ -9,7 +9,8 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       role: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        defaultValue: 0
       },
       email: {
         type: Sequelize.STRING
@@ -19,10 +20,6 @@ module.exports = {
       },
       nickname: {
         type: Sequelize.STRING
-      },
-      postCount: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0
       },
       createdAt: {
         allowNull: false,

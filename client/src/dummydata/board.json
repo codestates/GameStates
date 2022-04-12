@@ -1,166 +1,113 @@
 {
-    "codes": [
-      {
-        "id": 1,
-        "value": "J",
-        "desc": "Journal"
-      },
-      {
-        "id": 2,
-        "value": "D",
-        "desc": "ToDo"
-      }
-    ],
-    "boards": [
-      {
-        "id": 1,
-        "name": "일기",
-        "insertDate": 1617351293396,
-        "updateDate": 1617351293396,
-        "code": "J"
-      },
-      {
-        "id": 2,
-        "name": "할일",
-        "insertDate": 1617351448578,
-        "updateDate": 1617351448578,
-        "code": "D"
-      }
-    ],
-    "articles": [
-      {
-        "id": 1,
-        "title": "배고프다",
-        "content": "배고프다",
-        "views": 19,
-        "insertDate": 1617351293396,
-        "updateDate": 1649637967065,
-        "boardId": 1
-      },
-      {
-        "id": 2,
-        "title": "내일 뭐 먹을지 정해야 함",
-        "content": "한식 중식 일식gg",
-        "views": 9,
-        "insertDate": 1617351448578,
-        "updateDate": 1649637868888,
-        "boardId": 2,
-        "updateData": 1649600423688
-      },
-      {
-        "title": "dd",
-        "content": "한식",
-        "boardId": "1",
-        "id": 3,
-        "views": 5,
-        "insertDate": 1649600290210,
-        "updateDate": 1649637973634
-      },
-      {
-        "boardId": "2",
-        "title": "치킨",
-        "content": "ㅇㅇ",
-        "id": 4,
-        "views": 1,
-        "insertDate": 1649637874231,
-        "updateDate": 1649637874262
-      },
-      {
-        "boardId": "2",
-        "title": "치킨",
-        "content": "ㅇㅇ",
-        "id": 5,
-        "views": 1,
-        "insertDate": 1649637874231,
-        "updateDate": 1649637874262
-      },
-      {
-        "boardId": "2",
-        "title": "뭐먹지",
-        "content": "ㅇㅇ",
-        "id": 6,
-        "views": 1,
-        "insertDate": 1649637874231,
-        "updateDate": 1649637874262
-      },
-      {
-        "boardId": "2",
-        "title": "떡볶이",
-        "content": "ㅇㅇ",
-        "id": 7,
-        "views": 1,
-        "insertDate": 1649637874231,
-        "updateDate": 1649637874262
-      },
-      {
-        "boardId": "2",
-        "title": "치킨",
-        "content": "ㅇㅇ",
-        "id": 8,
-        "views": 1,
-        "insertDate": 1649637874231,
-        "updateDate": 1649637874262
-      },
-      {
-        "id": 9,
-        "title": "치킨",
-        "content": "한식 중식 일식gg",
-        "views": 9,
-        "insertDate": 1617351448578,
-        "updateDate": 1649637868888,
-        "boardId": 2,
-        "updateData": 1649600423688
-      },
-      {
-        "id": 10,
-        "title": "내일 뭐 먹을지 정해야 함",
-        "content": "한식 중식 일식gg",
-        "views": 9,
-        "insertDate": 1617351448578,
-        "updateDate": 1649637868888,
-        "boardId": 2,
-        "updateData": 1649600423688
-      },
-      {
-        "id": 11,
-        "title": "내일 뭐 먹을지 정해야 함",
-        "content": "한식 중식 일식gg",
-        "views": 9,
-        "insertDate": 1617351448578,
-        "updateDate": 1649637868888,
-        "boardId": 2,
-        "updateData": 1649600423688
-      },
-      {
-        "id": 12,
-        "title": "내일 뭐 먹을지 정해야 함",
-        "content": "한식 중식 일식gg",
-        "views": 9,
-        "insertDate": 1617351448578,
-        "updateDate": 1649637868888,
-        "boardId": 2,
-        "updateData": 1649600423688
-      },
-      {
-        "id": 13,
-        "title": "내일 뭐 먹을지 정해야 함",
-        "content": "한식 중식 일식gg",
-        "views": 9,
-        "insertDate": 1617351448578,
-        "updateDate": 1649637868888,
-        "boardId": 2,
-        "updateData": 1649600423688
-      }
-  
-    ],
-    "comments": [
-      {
-        "id": 2,
-        "content": "내일 뭐먹음",
-        "boardId": 1,
-        "articleId": 1,
-        "insertDate": 1618385359793,
-        "updateDate": 1618385359793
-      }
-    ]
-  }
+  "codes": [
+    {
+      "id": 1,
+      "value": "J",
+      "desc": "Journal"
+    },
+    {
+      "id": 2,
+      "value": "D",
+      "desc": "ToDo"
+    }
+  ],
+  "comments": [],
+  "articles": [
+    {
+      "title": "안녕하세요",
+      "content": "하이하이^^",
+      "insertDate": "2022-04-12 13:19:26",
+      "id": 1,
+      "commnet": [
+        {
+          "id": 1,
+          "title": "안녕하세요",
+          "content": "하이하이^^",
+          "insertDate": "2022-04-12 13:19:26"
+        }
+      ]
+    },
+    {
+      "title": "저는",
+      "content": "유정",
+      "insertDate": "2022-04-12 13:19:38",
+      "id": 2
+    },
+    {
+      "title": "유정",
+      "content": "이라고합니다. ",
+      "insertDate": "2022-04-12 13:20:25",
+      "id": 3
+    },
+    {
+      "name": "유정",
+      "title": "유정",
+      "content": "이라고합니다. ",
+      "insertDate": "2022-04-12 13:20:25",
+      "id": 4
+    },
+    {
+      "title": "아 ~ 이번에 핫타임 놓쳤습니다. ",
+      "content": "아 ~ 이번에 핫타임 놓쳤습니다. ",
+      "insertDate": "2022-04-12 13:28:33",
+      "name": "유정",
+      "id": 6
+    },
+    {
+      "title": "내일은또 뭐먹지? 저녁메뉴 추천좀 ㅋㅋ",
+      "content": "내일은또 뭐먹지?",
+      "insertDate": "2022-04-12 13:28:48",
+      "name": "유정",
+      "id": 7
+    },
+    {
+      "title": "이벤트 뭔가요오늘은?",
+      "content": "이벤트 뭔가요오늘은?",
+      "insertDate": "2022-04-12 13:29:50",
+      "name": "유정",
+      "id": 8
+    },
+    {
+      "title": "3시에 합쳐야함 ",
+      "content": "3시에 합쳐야함 3시에 합쳐야함 ",
+      "insertDate": "2022-04-12 13:30:03",
+      "name": "유정",
+      "id": 9
+    },
+    {
+      "title": "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ",
+      "content": "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ",
+      "insertDate": "2022-04-12 13:31:24",
+      "name": "유정",
+      "id": 11
+    },
+    {
+      "title": "ㅇ빨리 주말이왔으면 ㅠ",
+      "content": "ㅇ빨리 주말이왔으면 ㅠ",
+      "insertDate": "2022-04-12 13:31:31",
+      "name": "유정",
+      "id": 12
+    },
+    {
+      "title": "놀러가고싶어용",
+      "content": "놀러가고싶어용놀러가고싶어용놀러가고싶어용놀러가고싶어용",
+      "insertDate": "2022-04-12 13:31:40",
+      "name": "유정",
+      "id": 13
+    },
+    {
+      "title": "ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ",
+      "content": "ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ",
+      "insertDate": "2022-04-12 15:06:59",
+      "name": "유정",
+      "id": 14
+    },
+    {
+      "title": "크흠.,,,,,,,,",
+      "content": "세현님 ,,, 팀나가신뒈엽,,,",
+      "insertDate": "2022-04-12 15:12:20",
+      "name": "유정",
+      "id": 15
+    }
+  ]
+}

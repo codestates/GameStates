@@ -67,6 +67,8 @@ function App() {
 				<Route path="/login" element={<Login />} />
 				<Route path="/signup" element={<Signup isLogin={isLogin} />} />
 				<Route path="/logout" element={<Logout />} />
+				<Route path="/mypage" element={<Mypage />} />
+				<Route path="/signup" element={<Signup />} />
 				<Route path="/board" element={<Board />} />
 				<Route path="/mypagemodal" element={<MypageModal />} />
 			</Routes>
