@@ -1,19 +1,27 @@
-const { board, comment, user } = require("../models");
+const { board } = require("../models");
 const { isAuthorized } = require("../controller/tokenFunction");
 
 module.exports = {
-  getPost: async (req, res) => {
-    const a = await user.findOne({
-      where: { id: 2 },
-      include: [
-        {
-          model: comment,
-          include: [{ model: board }],
-        },
-      ],
-    });
-    console.log(a);
-    res.send(a);
+
+  getAllPost: async (req, res) => {
+    try {
+      const posts = await board.findAll({
+        order: [['createdAt','DESC']]
+      });
+      return res.json({ data: posts, message: "success" });
+    }
+    catch (err) {
+      return res.status(500).json({ message: "서버 에러" });
+    }
+    // const a = await user.findOne({
+    //   where: { id: 2 },
+    //   include: [
+    //     {
+    //       model: comment,
+    //       include: [{ model: board }],
+    //     },
+    //   ],
+    // });
   },
 
   writePost: async (req, res) => {
@@ -83,7 +91,7 @@ module.exports = {
           if (userInfo.id === existBoard.dataValues.userId) {
             await board.destroy({ where: { id } });
             res.status(200).json({ message: "삭제 완료" });
-          } 
+          }
         }
       } catch (err) {
         res.status(500).json({ message: "서버 에러" });
