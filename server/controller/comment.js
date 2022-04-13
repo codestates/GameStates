@@ -1,4 +1,6 @@
 const { comment: Comment } = require("../models");
+const { board, user } = require("../models");
+
 const { isAuthorized } = require("./tokenFunction");
 
 module.exports = {
@@ -21,7 +23,7 @@ module.exports = {
           return res.status(201).json({ isCreated });
         }
       } catch (err) {
-        return res.status(500).json({message : "서버 에러"});
+        return res.status(500).json({ message: "서버 에러" });
       }
     }
     res.status(401).json({ message: "인증 실패" });
@@ -51,9 +53,9 @@ module.exports = {
           }
         }
       } catch (err) {
-        return res.status(500).send({message : "서버 에러"})
+        return res.status(500).send({ message: "서버 에러" });
       }
-    }else{
+    } else {
       res.status(500).json({ message: "인증 실패" });
     }
   },
@@ -79,9 +81,9 @@ module.exports = {
           }
         }
       } catch (err) {
-        return res.status(500).send({ message: '서버 에러' })
+        return res.status(500).send({ message: "서버 에러" });
       }
     }
     return res.status(401).json({ message: "인증 실패" });
   },
-}
+};

@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.comment.belongsTo(models.user);
       models.comment.belongsTo(models.board);
     }
   }
@@ -25,7 +26,15 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'cascade',
       onUpdate: 'cascade'
     },
-    userId: DataTypes.INTEGER
+    userId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'user',
+        key: 'id'
+      },
+      onDelete: 'cascade', // 바라보는 원본 (부모 테이블) 삭제 시 같이 삭제 
+      onUpdate: 'cascade' 
+    }
   }, {
     sequelize,
     modelName: 'comment',

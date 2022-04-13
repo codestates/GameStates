@@ -3,50 +3,50 @@ const { isAuthorized } = require("../controller/tokenFunction");
 // const { where } = require("sequelize/types");
 
 module.exports = {
-
   getAllPost: async (req, res) => {
-
     try {
       const posts = await board.findAll({
-        order: [['createdAt','DESC']]
-      });
-      return res.json({ data: posts, message: "success" });
-    }
-    catch (err) {
-      return res.status(500).json({ message: "서버 에러" });
-    }
-  },
-  getPost: async (req, res) => {
-    try{
-      const {id} = req.params;
-      const isCreated = await board.findOne({
-        attributes: ["title", "description", "createdAt"],
-        where: {id},
+        order: [["createdAt", "DESC"]],
         include: [
           {
             model: user,
-            attributes: ["nickname"]
+            attributes: ["nickname"],
+          },
+        ],
+      });
+      return res.json({ data: posts, message: "success" });
+    } catch (err) {
+      return res.status(500).json({ message: "서버 에러" });
+    }
+  },
+
+  getPost: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { userId } = req.params;
+      const isCreated = await board.findOne({
+        attributes: ["title", "description", "createdAt"],
+        where: { id },
+        include: [
+          {
+            model: user,
+            attributes: ["nickname"],
           },
           {
-            model: comment
-          }
-        ]
-      })
-      return res.status(200).json({isCreated});
-    } catch(err){
-      return res.status(500).json({message: "서버 에러"});
+            model: comment,
+            include: [
+              {
+                model: user,
+                attributes: ["nickname"],
+              },
+            ],
+          },
+        ],
+      });
+      return res.status(200).json({ isCreated });
+    } catch (err) {
+      return res.status(500).json({ message: "서버 에러" });
     }
-    // const a = await user.findOne({
-    //   where: { id: 2 },
-    //   include: [
-    //     {
-    //       model: comment,
-    //       include: [{ model: board }],
-    //     },
-    //   ],
-    // });
-    // console.log(a);
-    // res.send(a);
   },
 
   writePost: async (req, res) => {
