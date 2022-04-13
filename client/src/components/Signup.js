@@ -11,7 +11,13 @@ function Signup() {
 	const [userEmail, setUserEmail] = useState('');
 	const [userPassword, setUserPassword] = useState('');
 	const [userNickname, SetUserNickname] = useState('');
+	const [validNumber, setValidNumber] = useState('');
 	const [errorMessage, setErrorMessage] = useState('');
+
+	// 유효한 인증번호를 입력했는지 확인
+	const isVaildNumber = (e) => {
+		setValidNumber(e.target.value);
+	};
 
 	// 유효한 이메일을 입력했는지 확인
 	const isValidEmail = () => {
@@ -54,14 +60,21 @@ function Signup() {
 		}
 	};
 
+	const emailValidRequest = () => {
+		axios.post('http://localhost:4000/auth/validate', {
+			email: userEmail,
+		});
+	};
+
 	// 3가지 항목을 모두 입력했는지 확인
 	// 계정 만들기 버튼을 클릭 시 서버로 회원가입 정보를 요청
 	const handleSignup = () => {
 		const email = userEmail;
 		const password = userPassword;
 		const nickname = userNickname;
+		const validate = validNumber;
 
-		if (!userEmail || !userPassword || !userNickname) {
+		if (!userEmail || !userPassword || !userNickname || !validNumber) {
 			setErrorMessage('모든 항목은 필수입니다.');
 		} else {
 			axios
@@ -71,6 +84,7 @@ function Signup() {
 						email,
 						password,
 						nickname,
+						validate,
 					},
 					{
 						withCredentials: true,
@@ -95,11 +109,21 @@ function Signup() {
 						회원가입이 완료가 되지 않습니다.
 					</div>
 					<form onSubmit={(e) => e.preventDefault()}>
-						<input
-							type="email"
-							placeholder="이메일 주소"
-							onChange={(e) => isValidEmail(setUserEmail(e.target.value))}
-						/>
+						<div className="input-container">
+							<input
+								className="email-input"
+								type="email"
+								placeholder="이메일 주소"
+								onChange={(e) => isValidEmail(setUserEmail(e.target.value))}
+							/>
+							<button
+								type="button"
+								className="email-valid-btn"
+								onClick={() => emailValidRequest()}
+							>
+								인증
+							</button>
+						</div>
 						<div className="email-invalid-message hide">
 							유효한 이메일 주소를 입력해 주시기 바랍니다.
 						</div>
@@ -119,6 +143,14 @@ function Signup() {
 						/>
 						<div className="nickname-invalid-message hide">
 							유효한 닉네임을 입력해 주시기 바랍니다.
+						</div>
+						<input
+							type="email"
+							placeholder="인증번호"
+							onChange={isVaildNumber}
+						/>
+						<div className="email-invalid-message hide">
+							유효한 이메일 주소를 입력해 주시기 바랍니다.
 						</div>
 					</form>
 					<div className="btn-container">

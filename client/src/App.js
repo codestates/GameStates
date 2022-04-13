@@ -24,10 +24,8 @@ function App() {
 	const [accessToken, setAccessToken] = useState('');
 	const navigate = useNavigate();
 
-	// 토큰을 이용해서 서버에 요청하여 유저정보 가져오기
-
+	// 로그인 상태 변경
 	const handleResponseSuccess = () => {
-		// console.log(accessToken);
 		setIsLogin(true);
 	};
 
@@ -56,9 +54,9 @@ function App() {
 			});
 	};
 
-	useEffect(() => {
-		setIsLogin(false);
-	}, []);
+	// useEffect(() => {
+	// 	setIsLogin(false);
+	// }, []);
 
 	useEffect(() => {
 		const url = new URL(window.location.href);
@@ -95,9 +93,10 @@ function App() {
 					element={
 						<Mypage
 							userInfo={userInfo}
+							accessToken={accessToken}
+							setIsLogin={setIsLogin}
 							setUserInfo={setUserInfo}
 							handleLogout={handleLogout}
-							accessToken={accessToken}
 						/>
 					}
 				/>
@@ -112,10 +111,17 @@ function App() {
 				/>
 				<Route path="/signup" element={<Signup isLogin={isLogin} />} />
 				<Route path="/logout" element={<Logout />} />
-				<Route
+				{/* <Route
 					path="/mypage"
-					element={<Mypage userInfo={userInfo} accessToken={accessToken} />}
-				/>
+					element={
+						<Mypage
+							userInfo={userInfo}
+							accessToken={accessToken}
+							setIsLogin={setIsLogin}
+							setUserInfo={setUserInfo}
+						/>
+					}
+				/> */}
 				<Route
 					path="/mypagemodal"
 					element={<MypageModal accessToken={accessToken} />}
@@ -123,7 +129,10 @@ function App() {
 				<Route path="/deleteUser" element={<DeleteUser />} />
 
 				<Route path="/board/List" element={<BoardList />} />
-				<Route path="/board" element={<Board isLogin={isLogin} />} />
+				<Route
+					path="/board"
+					element={<Board isLogin={isLogin} accessToken={accessToken} />}
+				/>
 				<Route path="/board:id" element={<Board isLogin={isLogin} />} />
 				<Route
 					path="/board/create"

@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
-function Mypage({ accessToken }) {
+function Mypage({ accessToken, setIsLogin, setUserInfo }) {
 	const navigate = useNavigate();
 	const [email, setEmail] = useState('');
 	const [nickname, setNickname] = useState('');
@@ -26,32 +26,30 @@ function Mypage({ accessToken }) {
 			});
 	});
 
-	const confirmMessage = () => {
-		if (window.confirm('정말 탈퇴하시겠습니까?')) {
-			navigate('/deleteUser');
-		} else {
-			alert('취소되었습니다.');
-			navigate('/mypage');
-		}
-	};
 	// 회원탈퇴 서버 요청
 	const deleteUserInfo = () => {
 		// confirm창에서 취소를 누르면 마이페이지로 이동
 		// 확인을 누르면 정상 회원탈퇴 페이지로 이동
-		confirmMessage();
-		axios
-			.delete(
-				'http://localhost:4000/user/deleteUserInfo',
-				{
-					headers: { authorization: `Bearer ${accessToken}` },
-				},
-				{
-					withCredentials: true,
-				},
-			)
-			.then((res) => {
-				navigate('/');
-			});
+		if (window.confirm('정말 탈퇴하시겠습니까?')) {
+			axios
+				.delete(
+					'http://localhost:4000/user/deleteUserInfo',
+					{
+						headers: { authorization: `Bearer ${accessToken}` },
+					},
+					{
+						withCredentials: true,
+					},
+				)
+				.then((res) => {
+					alert('정상적으로 탈퇴되었습니다.');
+					setUserInfo(null);
+					setIsLogin(false);
+					navigate('/');
+				});
+		} else {
+			alert('취소 되었습니다.');
+		}
 	};
 
 	return (

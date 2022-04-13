@@ -1,14 +1,16 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { axios } from 'axios';
 
-function BoardSidebar({ boardData }) {
-	const [userInfo, setuserInfo] = useState([]);
+function BoardSidebar({ boardData, accessToken }) {
+	const [nickname, setNickname] = useState('');
+
 	return (
 		<div className="sidebar">
 			<div className="mypage">
 				<div>
-					<h4>김유정 님</h4> <br /> 게시글 수 : {boardData.length}
+					<h4>{nickname} 님</h4> <br /> 게시글 수 : {boardData.length}
 				</div>
 				<button type="button" className="postCountButton">
 					내가 쓴 글

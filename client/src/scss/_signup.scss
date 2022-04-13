@@ -49,9 +49,43 @@
         margin-bottom: 32px;
         word-break: keep-all;
       }
+      .input-container {
+          position: relative;
+        .email-input {
+          // position: absolute;
+          margin-top: 15px;
+          padding: 10px 0 11px;
+          width: 100%;
+          border-bottom: 1px solid #dddfe4;
+          font-size: 16px;
+          font-weight: 400;
+          &:focus {
+            border-bottom: 1px solid #1ea1f7;
+            transition: 0.5s;
+          }
+          &:focus::-webkit-input-placeholder {
+            opacity: 0;
+            transition: 0.3s;
+          }
+        }
+        .email-valid-btn {
+            position: absolute;
+            background-color: #dddfe4;
+            left: 410px;
+            top: 25px;
+            font-weight: 400;
+            font-size: 15px;
+            color: white;
+            &:hover {
+              background-color: #ff5000;
+              cursor: pointer;
+              transition: all 1s;
+              color: white;
+            }
+        }
+      }
       input {
         margin-top: 15px;
-        position: relative;
         padding: 10px 0 11px;
         border: 0;
         width: 100%;
@@ -67,7 +101,7 @@
           opacity: 0;
           transition: 0.3s;
         }
-      }
+    }
       .email-invalid-message {
         margin-top: 10px;
         font-size: 15px;

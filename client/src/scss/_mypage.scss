@@ -7,7 +7,7 @@
     background-color: #f3f5f7;
   .container-view {
       width: 50vw;
-      height: 70vh;
+      height: 60vh;
       background-color: #ffffff;
       border-radius: 15px;
     .container-view_box {
@@ -143,15 +143,14 @@
         }
       }
       .user-delete-btn {
+          padding: 7px 15px 7px 15px;
+          border: none;
           margin-top: 20px;
-          height: 40px;
-          width: 10%;
-          float: left;
-          border: 0;
           &:hover {
             background-color: #ff5500;
             transition: 0.3s;
             cursor: pointer;
+            color: white;
             
         }
       }
@@ -274,13 +273,6 @@
         .save-btn {
           padding: 7px 15px 7px 15px;
           border: none;
-
-          //   display: block;
-          //   margin-top: 20px;
-          //   height: 40px;
-          //   width: 10%;
-          //   float: right;
-          //   border: 0;
           &:hover {
               cursor: pointer;
               transition: 0.3s;
