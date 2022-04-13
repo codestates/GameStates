@@ -21,7 +21,6 @@ module.exports = {
     "database": process.env.DATABASE_NAME,
     "host": process.env.DATABASE_HOST, // e.g. '127.0.0.1'
     "port": process.env.DATABASE_PORT,
-    "host": "127.0.0.1",
     "dialect": "mysql"
   }
 }
