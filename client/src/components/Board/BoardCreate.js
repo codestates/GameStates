@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import BoardSidebar from './BoardSidebar';
 
-function BoardCreate({ accessToken }) {
+function BoardCreate({ accessToken, isLogin }) {
 	const titleRef = useRef(null);
 	const contentRef = useRef(null);
 	const navigate = useNavigate();
@@ -105,7 +105,7 @@ function BoardCreate({ accessToken }) {
 	return (
 		<div className="wrap">
 			<div className="back">
-				<img src={`${process.env.PUBLIC_URL}/img/jungleNuNu.jpg`} alt="back" />
+				<img src={`${process.env.PUBLIC_URL}/img/jungleNuNu2.jpg`} alt="back" />
 			</div>
 
 			<div className="content">
@@ -119,7 +119,11 @@ function BoardCreate({ accessToken }) {
 					</form>
 				</div>
 				<div className="inner">
-					<BoardSidebar boardData={posts} />
+					<BoardSidebar
+						boardData={posts}
+						accessToken={accessToken}
+						isLogin={isLogin}
+					/>
 					<div className="article-list">
 						<form onSubmit={onSubmit} className="boardCreate">
 							{id ? (

@@ -6,6 +6,7 @@ import BoardSidebar from './BoardSidebar';
 
 function BoardRead({ accessToken, isLogin }) {
 	const [read, setRead] = useState([]);
+	const [nickname, setNickname] = useState([]);
 	const { id } = useParams();
 	const navigate = useNavigate();
 	const [posts, setPosts] = useState([]);
@@ -29,6 +30,7 @@ function BoardRead({ accessToken, isLogin }) {
 					baseURL: 'http://localhost:4000/board/',
 				});
 				setRead(response.data.isCreated);
+				setNickname(response.data.isCreated.user);
 			} catch (error) {
 				console.error(error);
 			}
@@ -67,7 +69,6 @@ function BoardRead({ accessToken, isLogin }) {
 				.then((res) => setPosts(res.data));
 		} else {
 			const filterData = posts.filter((el) => el.title.includes(search));
-			console.log(filterData);
 			setPosts(filterData);
 		}
 	};
@@ -75,7 +76,7 @@ function BoardRead({ accessToken, isLogin }) {
 	return (
 		<div className="wrap">
 			<div className="back">
-				<img src={`${process.env.PUBLIC_URL}/img/jungleNuNu.jpg`} alt="back" />
+				<img src={`${process.env.PUBLIC_URL}/img/jungleNuNu2.jpg`} alt="back" />
 			</div>
 
 			<div className="content">
@@ -95,13 +96,17 @@ function BoardRead({ accessToken, isLogin }) {
 					</form>
 				</div>
 				<div className="inner">
-					<BoardSidebar boardData={posts} />
+					<BoardSidebar
+						boardData={posts}
+						accessToken={accessToken}
+						isLogin={isLogin}
+					/>
 					<div className="article-list">
 						<div className="boardRead">
 							<div className="boardHeader">
 								<div className="boardReadTitle">{read.title}</div>
 								<div className="boardReadTitleSub">
-									<div className="boardName">{read.title}</div>
+									<div className="boardName">{nickname.nickname}</div>
 									<div className="createdAt">{read.createdAt}</div>
 								</div>
 								{id ? (
@@ -118,7 +123,7 @@ function BoardRead({ accessToken, isLogin }) {
 								) : null}
 							</div>
 							<div className="boardReadContent">{read.description}</div>
-							<BoardComment currentPosts={currentPosts} />
+							<BoardComment read={read} accessToken={accessToken} />
 						</div>
 					</div>
 				</div>

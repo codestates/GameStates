@@ -1,6 +1,8 @@
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Link, useParams } from 'react-router-dom';
 
-function BoardList({ currentPosts }) {
+function BoardList({ currentPosts, isLogin }) {
 	return (
 		<div className="article-list">
 			{currentPosts.map((item) => {

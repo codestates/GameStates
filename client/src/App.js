@@ -16,6 +16,7 @@ import Board from './components/Board/Board';
 import BoardRead from './components/Board/BoardRead';
 import BoardCreate from './components/Board/BoardCreate';
 import BoardList from './components/Board/BoardList';
+import Boardmycontent from './components/Board/Boardmycontent';
 import './scss/style.scss';
 
 function App() {
@@ -122,17 +123,23 @@ function App() {
 				/>
 				<Route path="/deleteUser" element={<DeleteUser />} />
 
-				<Route path="/board/List" element={<BoardList />} />
-				<Route path="/board" element={<Board isLogin={isLogin} />} />
+				<Route path="/board/List" element={<BoardList />} isLogin={isLogin} />
+				<Route
+					path="/board"
+					element={<Board isLogin={isLogin} accessToken={accessToken} />}
+				/>
 				<Route path="/board:id" element={<Board isLogin={isLogin} />} />
 				<Route
 					path="/board/create"
-					element={<BoardCreate accessToken={accessToken} />}
+					element={<BoardCreate accessToken={accessToken} isLogin={isLogin} />}
 				/>
 				<Route
-					path="/board/create/:id"
-					element={<BoardCreate accessToken={accessToken} />}
+					path="/board/mycontent"
+					element={
+						<Boardmycontent accessToken={accessToken} isLogin={isLogin} />
+					}
 				/>
+
 				<Route
 					path="/board/modify/:id"
 					element={<BoardCreate accessToken={accessToken} />}
@@ -142,6 +149,7 @@ function App() {
 					element={<BoardRead accessToken={accessToken} isLogin={isLogin} />}
 				/>
 			</Routes>
+
 			<Footer />
 		</div>
 	);

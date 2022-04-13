@@ -22,7 +22,7 @@ function MainContents() {
 					<h4>Update</h4>
 					{posts.map((item) => {
 						return (
-							<Link to={`/board/read/${item.id}`}>
+							<Link to={`/board/read/${item.id}`} key={item.id}>
 								<div className="mainArticleList">
 									<div className="listItem" key={item.id}>
 										<div className="title">{item.title}</div>
@@ -39,7 +39,7 @@ function MainContents() {
 					<h4>Board</h4>
 					{posts.map((item) => {
 						return (
-							<Link to={`/board/read/${item.id}`}>
+							<Link to={`/board/read/${item.id}`} key={item.id}>
 								<div className="mainArticleList">
 									<div className="listItem" key={item.id}>
 										<div className="title">{item.title}</div>

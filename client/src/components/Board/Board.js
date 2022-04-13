@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import BoardList from './BoardList';
 import BoardSidebar from './BoardSidebar';
 import Pagination from './Pagination';
 
-function Board({ isLogin, accessToken }) {
+function Board({ isLogin, accessToken, islogin }) {
 	const [posts, setPosts] = useState([]);
-	const { id } = useParams();
 	const getBoardList = async () => {
 		await axios
 			.get(`http://localhost:4000/board`)
@@ -29,32 +28,31 @@ function Board({ isLogin, accessToken }) {
 	// 검색 구현
 	const [search, setSearch] = useState('');
 	const onChangeSearch = (e) => {
-		e.preventDefault();
 		setSearch(e.target.value);
 	};
 
 	const onSerach = (e) => {
 		e.preventDefault();
 		if (search === null || search === '') {
-			axios
-				.get(`http://localhost:4000/board`)
-				.then((res) => setPosts(res.data.data));
+			alert('최소 한글자 이상 입력하셔야 합니다.');
 		} else {
 			const filterData = posts.filter((el) => el.title.includes(search));
 			setPosts(filterData);
 		}
+		if (posts === [] || null) {
+			alert('검색결과가 없습니다.');
+		}
 	};
-
 	return (
 		<div className="wrap">
 			<div className="back">
-				<img src={`${process.env.PUBLIC_URL}/img/jungleNuNu.jpg`} alt="back" />
+				<img src={`${process.env.PUBLIC_URL}/img/jungleNuNu2.jpg`} alt="back" />
 			</div>
 
 			<div className="content">
 				<div className="boardTitle">
 					<p>Board </p>
-					<form className="searchInput" onsSubmit={onSerach}>
+					<form className="searchInput">
 						<input
 							type="text"
 							name="search"
@@ -62,13 +60,17 @@ function Board({ isLogin, accessToken }) {
 							placeholder="검색하세요"
 							onChange={onChangeSearch}
 						/>
-						<button type="submit" className="searchButton">
+						<button type="submit" onClick={onSerach} className="searchButton">
 							Go
 						</button>
 					</form>
 				</div>
 				<div className="inner">
-					<BoardSidebar boardData={posts} accessToken={accessToken} />
+					<BoardSidebar
+						boardData={posts}
+						accessToken={accessToken}
+						isLogin={isLogin}
+					/>
 					<BoardList currentPosts={currentPosts} />
 				</div>
 				<div className="bottomBtm">
