@@ -61,13 +61,16 @@ module.exports = {
   },
 
   signup: async (req, res) => {
-    const { email, nickname, password } = req.body;
+    const { email, nickname, password, validate } = req.body;
 
-    if (!email || !nickname || !password) {
+    if (!email || !nickname || !password || !validate) {
       return res.json({ message: "필수 항목을 입력하세요." });
     }
-
+    console.log(validate);
     try {
+      if (validate !== "123345") {
+        return res.send("올바른 인증번호를 입력하세요.");
+      }
       const USER = await user.findOne({ where: { email } });
       // 비밀번호 암호화하기
       const hashed = await bcrypt.hash(password, 10);
@@ -93,7 +96,7 @@ module.exports = {
     try {
       // Exchange authorization code for refresh tokens and access tokens
       const result = await axios.post(
-        `https://oauth2.googleapis.com/token?code=${code}&client_id=${process.env.GOOGLE_CLIENT_ID}&client_secret=${process.env.GOOGLE_CLIENT_SECRET}&redirect_uri=http://localhost:3000&grant_type=authorization_code`
+        `https://oauth2.googleapis.com/token?code=${code}&client_id=${process.env.GOOGLE_CLIENT_ID}&client_secret=${process.env.GOOGLE_CLIENT_SECRET}&redirect_uri=${process.env.GOOGLE_REDIRECT_URI}&grant_type=authorization_code`
       );
       // Calling Google APIs with access token
       // 이부분을 클라이언트가 가져가야 하는 건지?
