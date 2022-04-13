@@ -7,7 +7,7 @@
     background-color: #f3f5f7;
   .container-view {
       width: 50vw;
-      height: 80vh;
+      height: 70vh;
       background-color: #ffffff;
       border-radius: 15px;
     .container-view_box {
@@ -64,28 +64,45 @@
           }
         }
       }
-      .edit-btn {
-        display: inline-block;
-        margin-top: 20px;
-        margin-left: 660px;
-        height: 40px;
-        width: 10%;
-        border: 0;
-        &:hover {
-          cursor: pointer;
-          background-color: #ff5500;
-        }
-      }
-      .save-btn {
-          display: block;
-          margin-top: 20px;
-          height: 40px;
-          width: 10%;
-          float: right;
-          border: 0;
-        &:hover {
-            cursor: pointer;
-            background-color: #ff5500;
+      .mypageBtn {
+        display: flex;
+        float: right;
+        margin-top:10px;
+
+        .edit-btn {
+        //   display: inline-block;
+        padding: 7px 15px 7px 15px;
+        margin-right: 10px;
+        border: none;
+        //     cursor: pointer;
+        //     transition: 0.3s;
+        //     background-color: #ff5500;
+        //   }
+            &:hover {
+              cursor: pointer;
+              transition: 0.3s;
+              background-color: #ff5500;
+              color: white;
+
+          }
+         }
+        .save-btn {
+          padding: 7px 15px 7px 15px;
+          border: none;
+
+          //   display: block;
+          //   margin-top: 20px;
+          //   height: 40px;
+          //   width: 10%;
+          //   float: right;
+          //   border: 0;
+          &:hover {
+              cursor: pointer;
+              transition: 0.3s;
+              background-color: #ff5500;
+              color: white;
+
+          }
         }
       }
       .user-delete_title {
@@ -108,21 +125,13 @@
       .container-checkbox {
           margin-top: 24px;
           position: relative;
-        input[type="checkbox"] {
+        input {
             position: absolute;
             width: 20px;
             height: 20px;
-            border-radius: 50%;
             border: 1px solid #999;
-            appearance: none;
             cursor: pointer;
-            transition: background 0.2s;
-            &:focus {
-              outline: none;
-              background-color: #0dc790;
-              border: 1px solid #0dc790;
-              transition: 0.5s;
-          }
+            transition: 0.2s;
         }
         .checkbox-sub {
             margin: 0;
@@ -141,7 +150,9 @@
           border: 0;
           &:hover {
             background-color: #ff5500;
+            transition: 0.3s;
             cursor: pointer;
+            
         }
       }
     }
@@ -239,30 +250,47 @@
           }
         }
       }
-      .cancel-btn {
-        margin-top: 20px;
-        margin-left: 680px;
-        width: 80px;
-        height: 40px;
-        float: left;
-        border: 0;
-        &:hover {
-          cursor: pointer;
-          background-color: #ff5500;
-        }
-      }
-      .save-btn {
-        margin-top: 20px;
-        width: 80px;
-        height: 40px;
+      .modalBtn {
+        display: flex;
         float: right;
-        border: 0;
-        &:hover {
-          cursor: pointer;
-          background-color: #ff5500;
+        margin-top:10px;
+
+        .cancel-btn {
+        //   display: inline-block;
+        padding: 7px 15px 7px 15px;
+        margin-right: 10px;
+        border: none;
+        //     cursor: pointer;
+        //     transition: 0.3s;
+        //     background-color: #ff5500;
+        //   }
+            &:hover {
+              cursor: pointer;
+              transition: 0.3s;
+              background-color: #ff5500;
+              color: white;
+          }
+         }
+        .save-btn {
+          padding: 7px 15px 7px 15px;
+          border: none;
+
+          //   display: block;
+          //   margin-top: 20px;
+          //   height: 40px;
+          //   width: 10%;
+          //   float: right;
+          //   border: 0;
+          &:hover {
+              cursor: pointer;
+              transition: 0.3s;
+              background-color: #ff5500;
+              color: white;
+
+          }
         }
-      }
     }
+  }
   }
 }
 }

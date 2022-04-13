@@ -10,6 +10,16 @@ function BoardRead({ accessToken, isLogin }) {
 	const navigate = useNavigate();
 	const [posts, setPosts] = useState([]);
 
+	const getBoardList = async () => {
+		await axios
+			.get(`http://localhost:4000/board`)
+			.then((res) => setPosts(res.data.data));
+	};
+
+	useEffect(() => {
+		getBoardList();
+	}, []);
+
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -34,23 +44,6 @@ function BoardRead({ accessToken, isLogin }) {
 				withCredentials: true,
 			})
 			.then(() => alert('게시판 삭제가 완료 되었습니다'))
-			.then(() => navigate('/board'));
-	};
-
-	const modify = () => {
-		axios
-			.patch(
-				`http://localhost:4000/create/${id}`,
-				{
-					title: 'hi',
-					description: 'hi',
-				},
-				{
-					headers: { authorization: `Bearer ${accessToken}` },
-					withCredentials: true,
-				},
-			)
-			.then(() => alert('수정이 완료 되었습니다'))
 			.then(() => navigate('/board'));
 	};
 

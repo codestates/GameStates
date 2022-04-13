@@ -29,9 +29,9 @@ function BoardComment({ currentPosts }) {
 			{currentPosts.map((item) => {
 				return (
 					<div className="commnetListItem" key={item.id}>
-						<div className="title">{item.title}</div>
-						<div className="name">{item.title}</div>
-						<div className="createAt">{item.createdAt}</div>
+						<div className="title">{item.comments}</div>
+						<div className="name">{item.comments}</div>
+						<div className="createAt">{item.comments}</div>
 					</div>
 				);
 			})}

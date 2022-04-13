@@ -10,7 +10,7 @@
   top: 0;
   .modal-view-container {
     width: 450px;
-    height: 80vh;
+    height: 85vh;
     background-color: #ffffff;
     font-size: 3rem;
     display: flex;
@@ -48,7 +48,6 @@
         background-color: #ffffff;
         border: 1px solid lightgray;
         &:hover {
-          background-color: #4286f5;
           transition: 0.3s;
         }
       }

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
-function Signup({}) {
+function Signup() {
 	// 유저 이메일 유효성 검사
 	// 올바른 이메일 형식 필수 입력
 	// 3개 항목중 하나라도 미입력 후 계정 만들기 버튼 클릭 시 모든 항목 입력 메세지
@@ -34,11 +34,7 @@ function Signup({}) {
 			'.password-invalid-message',
 		);
 		// 최소 8 자, 최소 하나의 알파벳, 하나의 숫자 및 하나의 특수 문자 :
-		if (
-			/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@!%*#?&])[A-Za-z\d@!%*#?&]{8,}$/.test(
-				userPassword,
-			)
-		) {
+		if (/(?=.*\d)(?=.*[a-zA-ZS]).{8,}/.test(userPassword)) {
 			passwordFailMessage.classList.add('hide');
 		} else {
 			passwordFailMessage.classList.remove('hide');
