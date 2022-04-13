@@ -5,7 +5,7 @@ import BoardList from './BoardList';
 import BoardSidebar from './BoardSidebar';
 import Pagination from './Pagination';
 
-function Board({ isLogin }) {
+function Board({ isLogin, accessToken }) {
 	const [posts, setPosts] = useState([]);
 	const { id } = useParams();
 	const getBoardList = async () => {
@@ -68,7 +68,7 @@ function Board({ isLogin }) {
 					</form>
 				</div>
 				<div className="inner">
-					<BoardSidebar boardData={posts} />
+					<BoardSidebar boardData={posts} accessToken={accessToken} />
 					<BoardList currentPosts={currentPosts} />
 				</div>
 				<div className="bottomBtm">
