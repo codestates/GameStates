@@ -9,6 +9,7 @@ import Header from './components/Header';
 import Main from './components/Main/Main';
 import Login from './components/Login';
 import Logout from './components/Logout';
+import DeleteUser from './components/DeleteUser';
 import Mypage from './components/Mypage/Mypage';
 import MypageModal from './components/Mypage/MypageModal';
 import Board from './components/Board/Board';
@@ -19,19 +20,23 @@ import './scss/style.scss';
 
 function App() {
 	const [isLogin, setIsLogin] = useState(false);
-	const [userInfo, setUserInfo] = useState(null);
+	const [userInfo, setUserInfo] = useState('');
 	const [accessToken, setAccessToken] = useState('');
 	const navigate = useNavigate();
+
+	// 토큰을 이용해서 서버에 요청하여 유저정보 가져오기
 
 	const handleResponseSuccess = () => {
 		// console.log(accessToken);
 		setIsLogin(true);
 	};
 
+	// 서버에서 받아온 토큰 최신화
 	const issueAccessToken = (token) => {
 		setAccessToken(token);
 	};
 
+	// 서버에 토큰을 보내며 로그아웃 요청
 	const handleLogout = () => {
 		axios
 			.post(
@@ -63,6 +68,7 @@ function App() {
 		}
 	}, []);
 
+	// 구글에 authorization code와 함께 요청
 	function google(authorizationCode) {
 		axios
 			.post('http://localhost:4000/auth/google/callback', null, {
@@ -86,7 +92,14 @@ function App() {
 				<Route exact path="/" element={<Main />} />
 				<Route
 					path="/mypage"
-					element={<Mypage userInfo={userInfo} handleLogout={handleLogout} />}
+					element={
+						<Mypage
+							userInfo={userInfo}
+							setUserInfo={setUserInfo}
+							handleLogout={handleLogout}
+							accessToken={accessToken}
+						/>
+					}
 				/>
 				<Route
 					path="/login"
@@ -99,10 +112,17 @@ function App() {
 				/>
 				<Route path="/signup" element={<Signup isLogin={isLogin} />} />
 				<Route path="/logout" element={<Logout />} />
-				<Route path="/mypage" element={<Mypage />} />
+				<Route
+					path="/mypage"
+					element={<Mypage userInfo={userInfo} accessToken={accessToken} />}
+				/>
 				<Route path="/signup" element={<Signup />} />
 				<Route path="/board" element={<Board />} />
-				<Route path="/mypagemodal" element={<MypageModal />} />
+				<Route
+					path="/mypagemodal"
+					element={<MypageModal accessToken={accessToken} />}
+				/>
+				<Route path="/deleteUser" element={<DeleteUser />} />
 			</Routes>
 			<Routes>
 				<Route path="/board/List" element={<BoardList />} />

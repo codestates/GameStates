@@ -14,7 +14,6 @@ const {
 module.exports = {
   login: async (req, res) => {
     const { email, password } = req.body;
-
     // 암호화된 비밀번호 사용 시, password 제외, email로 유저를 찾기
     try {
       const User = await user.findOne({ where: { email } });
@@ -44,6 +43,7 @@ module.exports = {
     const userInfo = isAuthorized(req);
     try {
       if (userInfo) {
+        // console.log(userInfo);
         return res
           .clearCookie("jwt", {
             sameSite: "None",
@@ -53,9 +53,7 @@ module.exports = {
           .status(200)
           .json({ message: "로그아웃 성공" });
       } else {
-        return res
-          .status(400)
-          .json({ message: "이미 로그아웃 된 상태입니다." });
+        return res.json({ message: "이미 로그아웃 된 상태입니다." });
       }
     } catch (err) {
       return res.status(500).json({ message: "서버 에러" });

@@ -14,6 +14,7 @@ function Login({ handleResponseSuccess, issueAccessToken }) {
 		setLoginInfo({ ...loginInfo, [key]: e.target.value });
 	};
 
+	// 구글 로그인을 위해 요청
 	const handleAuthLogin = () => {
 		window.location.assign(
 			`https://accounts.google.com/o/oauth2/v2/auth?scope=
@@ -23,6 +24,7 @@ function Login({ handleResponseSuccess, issueAccessToken }) {
 		);
 	};
 
+	// 로그인 정보 서버에 요청
 	const handleLogin = () => {
 		const { email, password } = loginInfo;
 		if (!email || !password) {

@@ -7,7 +7,7 @@
     background-color: #f3f5f7;
   .container-view {
       width: 50vw;
-      height: 80vh;
+      height: 70vh;
       background-color: #ffffff;
       border-radius: 15px;
     .container-view_box {
@@ -73,6 +73,7 @@
         border: 0;
         &:hover {
           cursor: pointer;
+          transition: 0.3s;
           background-color: #ff5500;
         }
       }
@@ -85,6 +86,7 @@
           border: 0;
         &:hover {
             cursor: pointer;
+            transition: 0.3s;
             background-color: #ff5500;
         }
       }
@@ -108,21 +110,13 @@
       .container-checkbox {
           margin-top: 24px;
           position: relative;
-        input[type="checkbox"] {
+        input {
             position: absolute;
             width: 20px;
             height: 20px;
-            border-radius: 50%;
             border: 1px solid #999;
-            appearance: none;
             cursor: pointer;
             transition: background 0.2s;
-            &:focus {
-              outline: none;
-              background-color: #0dc790;
-              border: 1px solid #0dc790;
-              transition: 0.5s;
-          }
         }
         .checkbox-sub {
             margin: 0;
@@ -141,6 +135,7 @@
           border: 0;
           &:hover {
             background-color: #ff5500;
+            transition: 0.3s;
             cursor: pointer;
         }
       }
