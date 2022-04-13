@@ -1,24 +1,20 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import moment from 'moment';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import 'moment/locale/ko';
 import { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import BoardSidebar from './BoardSidebar';
 
-function BoardCreate({ accessToken }) {
+function BoardCreate({ accessToken, match }) {
 	const titleRef = useRef(null);
 	const contentRef = useRef(null);
 	const navigate = useNavigate();
-	const nowTime = moment().format('YYYY-MM-DD HH:mm:ss');
 	const [posts, setPosts] = useState([]);
+	// eslint-disable-next-line no-undef
+
+	const { id } = useParams();
 
 	const onSubmit = (e) => {
 		e.preventDefault();
 	};
-	console.log(accessToken);
-
 	const getBoardList = async () => {
 		await axios
 			.get(`http://localhost:4000/board`)
@@ -48,47 +44,42 @@ function BoardCreate({ accessToken }) {
 	// };
 
 	const axiosPost = () => {
-		axios
-			.post(
-				'http://localhost:4000/board',
-				{
-					title: titleRef.current.value,
-					description: contentRef.current.value,
-				},
-				{
-					headers: { authorization: `Bearer ${accessToken}` },
-					withCredentials: true,
-				},
-			)
-			.then(() => alert('게시판 등록이 완료 되었습니다'))
-			.then(() => navigate('/board'));
+		if (titleRef.current.value === '' && contentRef.current.value === '') {
+			alert('모든 칸을 작성해야합니다!');
+		} else if (titleRef.current.value.length >= 20) {
+			alert('20글자 이하로 작성해야합니다!!');
+		} else {
+			axios
+				.post(
+					'http://localhost:4000/board',
+					{
+						title: titleRef.current.value,
+						description: contentRef.current.value,
+					},
+					{
+						headers: { authorization: `Bearer ${accessToken}` },
+						withCredentials: true,
+					},
+				)
+				.then(() => alert('게시판 등록이 완료 되었습니다'))
+				.then(() => navigate('/board'));
+		}
 	};
 
-	// const axiosPost = () => {
-	// 	const { postData } = {
-	// 		title: titleRef.current.value,
-	// 		escription: contentRef.current.value,
-	// 	};
-	// 	axios
-	// 		.post(
-	// 			`http://localhost:4000/board`,
-	// 			postData,
-	// 			{
-	// 				headers: {
-	// 					'Content-type': 'application/json',
-	// 				},
-	// 			},
-	// 			// {
-	// 			//     title: titleRef.current.value,
-	// 			//     description: contentRef.current.value,
-	// 			// },
-	// 			{
-	// 				withCredentials: true,
-	// 			},
-	// 		)
-	// 		.then(() => alert('게시판 등록이 완료 되었습니다'))
-	// 		.then(() => navigate('/board'));
-	// };
+	const [modifyData, setModifyData] = useState([]);
+
+	const getModifyData = async (boardid) => {
+		const getData = await axios('http://localhost:4000/board/', {
+			method: 'POST',
+			headers: new Headers(),
+			data: { id: boardid },
+		});
+
+		modifyData({
+			title: getData.data[0].title,
+			contents: getData.data[0].contents,
+		});
+	};
 
 	return (
 		<div className="wrap">
@@ -135,7 +126,7 @@ function BoardCreate({ accessToken }) {
 										type="button"
 										className="boardWriteBtnRight"
 									>
-										작성완료
+										{id ? '수정 완료' : '작성 완료'}
 									</button>
 								</div>
 							</div>
@@ -146,4 +137,5 @@ function BoardCreate({ accessToken }) {
 		</div>
 	);
 }
+
 export default BoardCreate;

@@ -4,7 +4,7 @@ import axios from 'axios';
 import BoardComment from './BoardComment';
 import BoardSidebar from './BoardSidebar';
 
-function BoardRead({ accessToken }) {
+function BoardRead({ accessToken, isLogin }) {
 	const [read, setRead] = useState([]);
 	const { id } = useParams();
 	const navigate = useNavigate();
@@ -17,7 +17,6 @@ function BoardRead({ accessToken }) {
 					method: 'get',
 					url: `http://localhost:4000/board/${id}`,
 					baseURL: 'http://localhost:4000/board/',
-					timeout: 2000,
 				});
 				setRead(response.data.isCreated);
 			} catch (error) {
@@ -27,17 +26,6 @@ function BoardRead({ accessToken }) {
 
 		fetchData();
 	}, []);
-	console.log(read);
-
-	// const getBoardList = async () => {
-	// 	await axios
-	// 		.get(`http://localhost:4000/board/`)
-	// 		.then((res) => setPosts(res.data.data));
-	// };
-
-	// useEffect(() => {
-	// 	getBoardList();
-	// }, []);
 
 	const del = () => {
 		axios
@@ -46,6 +34,23 @@ function BoardRead({ accessToken }) {
 				withCredentials: true,
 			})
 			.then(() => alert('게시판 삭제가 완료 되었습니다'))
+			.then(() => navigate('/board'));
+	};
+
+	const modify = () => {
+		axios
+			.patch(
+				`http://localhost:4000/create/${id}`,
+				{
+					title: 'hi',
+					description: 'hi',
+				},
+				{
+					headers: { authorization: `Bearer ${accessToken}` },
+					withCredentials: true,
+				},
+			)
+			.then(() => alert('수정이 완료 되었습니다'))
 			.then(() => navigate('/board'));
 	};
 
@@ -106,14 +111,18 @@ function BoardRead({ accessToken }) {
 									<div className="boardName">{read.title}</div>
 									<div className="createdAt">{read.createdAt}</div>
 								</div>
-								<div className="boardReadTitleBtn">
-									<button type="button" onClick={del} className="delButton">
-										삭제
-									</button>
-									<button type="button" onClick={del} className="putButton">
-										수정
-									</button>
-								</div>
+								{id ? (
+									<div className="boardReadTitleBtn">
+										<button type="button" onClick={del} className="delButton">
+											삭제
+										</button>
+										<Link to={`/board/modify/${id}`}>
+											<button type="button" className="putButton">
+												수정
+											</button>
+										</Link>
+									</div>
+								) : null}
 							</div>
 							<div className="boardReadContent">{read.description}</div>
 							<BoardComment currentPosts={currentPosts} />
@@ -121,9 +130,11 @@ function BoardRead({ accessToken }) {
 					</div>
 				</div>
 				<div className="bottomBtm">
-					<button type="button" className="writeButton">
-						<Link to="/board/create">글쓰기</Link>
-					</button>
+					{isLogin ? (
+						<button type="button" className="writeButton">
+							<Link to="/board/create">글쓰기</Link>
+						</button>
+					) : null}
 				</div>
 			</div>
 		</div>

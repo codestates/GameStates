@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 function BoardSidebar({ boardData }) {
+	const [userInfo, setuserInfo] = useState([]);
 	return (
 		<div className="sidebar">
 			<div className="mypage">
@@ -18,7 +20,7 @@ function BoardSidebar({ boardData }) {
 					<h3> 메뉴 </h3>
 				</div>
 				<div className="menuList">
-					<Link to="/board">커뮤니티</Link>
+					<Link to="/board">업데이트</Link>
 				</div>
 				<div className="menuList">
 					<Link to="/board">커뮤니티</Link>

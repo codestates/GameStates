@@ -1,7 +1,15 @@
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 function BoardComment({ currentPosts }) {
+	// const getBoardList = async () => {
+	// 	const [comment, setComment] = useState([]);
+	// 	await axios
+	// 		.get(`http://localhost:4000/board/{id}`)
+	// 		.then((res) => setComment(res.data.data.comments));
+	// };
+
 	return (
 		<div className="boardComment">
 			<div className="boardCommentTitle"> 댓글 </div>
@@ -22,8 +30,8 @@ function BoardComment({ currentPosts }) {
 				return (
 					<div className="commnetListItem" key={item.id}>
 						<div className="title">{item.title}</div>
-						<div className="name">{item.name}</div>
-						<div className="createAt">{item.insertDate}</div>
+						<div className="name">{item.title}</div>
+						<div className="createAt">{item.createdAt}</div>
 					</div>
 				);
 			})}

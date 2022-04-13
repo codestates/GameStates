@@ -1,33 +1,29 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import BoardList from './BoardList';
 import BoardSidebar from './BoardSidebar';
 import Pagination from './Pagination';
 
-function Board() {
+function Board({ isLogin }) {
 	const [posts, setPosts] = useState([]);
-
+	const { id } = useParams();
 	const getBoardList = async () => {
 		await axios
 			.get(`http://localhost:4000/board`)
 			.then((res) => setPosts(res.data.data));
 	};
-	console.log(posts);
 
 	useEffect(() => {
 		getBoardList();
 	}, []);
-	console.log(getBoardList);
 
 	// pagenation 구현
 	const [currentPage, setCurrentPage] = useState(1);
 	const [postsPerPage] = useState(10);
 	const indexOfLastPost = currentPage * postsPerPage;
 	const indexOfFirstPost = indexOfLastPost - postsPerPage;
-	const currentPosts = posts
-		.sort((a, b) => b.id - a.id)
-		.slice(indexOfFirstPost, indexOfLastPost);
+	const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 	const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
 	// 검색 구현
@@ -36,12 +32,13 @@ function Board() {
 		e.preventDefault();
 		setSearch(e.target.value);
 	};
+
 	const onSerach = (e) => {
 		e.preventDefault();
 		if (search === null || search === '') {
 			axios
-				.get(`http://localhost:4003/articles`)
-				.then((res) => setPosts(res.data));
+				.get(`http://localhost:4000/board`)
+				.then((res) => setPosts(res.data.data));
 		} else {
 			const filterData = posts.filter((el) => el.title.includes(search));
 			setPosts(filterData);
@@ -81,9 +78,11 @@ function Board() {
 						currentPage={currentPage}
 						paginate={paginate}
 					/>
-					<button type="button" className="writeButton">
-						<Link to="/board/create">글쓰기</Link>
-					</button>
+					{isLogin ? (
+						<button type="button" className="writeButton">
+							<Link to="/board/create">글쓰기</Link>
+						</button>
+					) : null}
 				</div>
 			</div>
 		</div>
