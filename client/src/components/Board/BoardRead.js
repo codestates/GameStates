@@ -43,7 +43,7 @@ function BoardRead({ accessToken, isLogin }) {
 	const del = () => {
 		if (window.confirm('삭제하시겠습니까?')) {
 			axios
-				.delete(`${process.env.REACT_APP_GAMESTATES_API_URL}${id}`, {
+				.delete(`${process.env.REACT_APP_GAMESTATES_API_URL}board/${id}`, {
 					headers: { authorization: `Bearer ${accessToken}` },
 					withCredentials: true,
 				})
