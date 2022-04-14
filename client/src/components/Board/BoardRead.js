@@ -10,6 +10,7 @@ function BoardRead({ accessToken, isLogin }) {
 	const { id } = useParams();
 	const navigate = useNavigate();
 	const [posts, setPosts] = useState([]);
+	const [userInfo, setUserInfo] = useState([]);
 
 	const getBoardList = async () => {
 		await axios
@@ -40,13 +41,15 @@ function BoardRead({ accessToken, isLogin }) {
 	}, []);
 
 	const del = () => {
-		axios
-			.delete(`http://localhost:4000/board/${id}`, {
-				headers: { authorization: `Bearer ${accessToken}` },
-				withCredentials: true,
-			})
-			.then(() => alert('게시판 삭제가 완료 되었습니다'))
-			.then(() => navigate('/board'));
+		if (window.confirm('삭제하시겠습니까?')) {
+			axios
+				.delete(`http://localhost:4000/board/${id}`, {
+					headers: { authorization: `Bearer ${accessToken}` },
+					withCredentials: true,
+				})
+				.then(() => alert('게시글 삭제가 완료 되었습니다'))
+				.then(() => navigate('/board'));
+		}
 	};
 
 	const [currentPage, setCurrentPage] = useState(1);
@@ -72,6 +75,19 @@ function BoardRead({ accessToken, isLogin }) {
 			setPosts(filterData);
 		}
 	};
+
+	useEffect(() => {
+		axios
+			.get('http://localhost:4000/user/getUserInfo', {
+				headers: { authorization: `Bearer ${accessToken}` },
+			})
+			.then((res) => {
+				// console.log(res.data.data);
+				setUserInfo(res.data.data);
+			});
+	}, []);
+
+	const findPosts = userInfo.nickname === nickname.nickname;
 
 	return (
 		<div className="wrap">
@@ -109,7 +125,7 @@ function BoardRead({ accessToken, isLogin }) {
 									<div className="boardName">{nickname.nickname}</div>
 									<div className="createdAt">{read.createdAt}</div>
 								</div>
-								{id ? (
+								{findPosts ? (
 									<div className="boardReadTitleBtn">
 										<button type="button" onClick={del} className="delButton">
 											삭제
@@ -123,7 +139,11 @@ function BoardRead({ accessToken, isLogin }) {
 								) : null}
 							</div>
 							<div className="boardReadContent">{read.description}</div>
-							<BoardComment read={read} accessToken={accessToken} />
+							<BoardComment
+								read={read}
+								setRead={setRead}
+								accessToken={accessToken}
+							/>
 						</div>
 					</div>
 				</div>

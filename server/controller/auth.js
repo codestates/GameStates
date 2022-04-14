@@ -68,9 +68,9 @@ module.exports = {
     }
     console.log(validate);
     try {
-      if (validate !== "123345") {
-        return res.send("올바른 인증번호를 입력하세요.");
-      }
+      // if (validate !== "123345") {
+      //   return res.send("올바른 인증번호를 입력하세요.");
+      // }
       const USER = await user.findOne({ where: { email } });
       // 비밀번호 암호화하기
       const hashed = await bcrypt.hash(password, 10);

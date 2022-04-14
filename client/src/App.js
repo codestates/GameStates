@@ -148,10 +148,14 @@ function App() {
 
 				<Route
 					path="/board/modify/:id"
-					element={<BoardCreate accessToken={accessToken} />}
+					element={<BoardCreate accessToken={accessToken} isLogin={isLogin} />}
 				/>
 				<Route
 					path="/board/read/:id"
+					element={<BoardRead accessToken={accessToken} isLogin={isLogin} />}
+				/>
+				<Route
+					path="/board/comment/:commentId"
 					element={<BoardRead accessToken={accessToken} isLogin={isLogin} />}
 				/>
 			</Routes>
