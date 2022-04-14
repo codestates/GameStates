@@ -8,9 +8,11 @@ import Pagination from './Pagination';
 function Board({ isLogin, accessToken }) {
 	const [posts, setPosts] = useState([]);
 	const getBoardList = async () => {
-		await axios.get(`${process.env.GAMESTATES_API_URL}`).then((res) => {
-			setPosts(res.data.data);
-		});
+		await axios
+			.get(`${process.env.REACT_APP_GAMESTATES_API_URL}board`)
+			.then((res) => {
+				setPosts(res.data.data);
+			});
 	};
 
 	useEffect(() => {
@@ -46,7 +48,7 @@ function Board({ isLogin, accessToken }) {
 	return (
 		<div className="wrap">
 			<div className="back">
-				<img src={`${process.env.PUBLIC_URL}img/jungleNuNu2.jpg`} alt="back" />
+				<img src={`${process.env.PUBLIC_URL}/img/jungleNuNu2.jpg`} alt="back" />
 			</div>
 
 			<div className="content">

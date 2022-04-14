@@ -18,7 +18,7 @@ function BoardCreate({ accessToken, isLogin }) {
 	};
 	const getBoardList = async () => {
 		await axios
-			.get(`http://localhost:4000/board/`)
+			.get(`${process.env.REACT_APP_GAMESTATES_API_URL}board`)
 			.then((res) => setPosts(res.data.data));
 	};
 
@@ -31,8 +31,8 @@ function BoardCreate({ accessToken, isLogin }) {
 			try {
 				const response = await axios({
 					method: 'get',
-					url: `http://localhost:4000/board/${id}`,
-					baseURL: 'http://localhost:4000/board/',
+					url: `${process.env.REACT_APP_GAMESTATES_API_URL}board/${id}`,
+					baseURL: `${process.env.REACT_APP_GAMESTATES_API_URL}board`,
 				});
 				setPost(response.data.isCreated);
 			} catch (error) {
@@ -67,7 +67,7 @@ function BoardCreate({ accessToken, isLogin }) {
 	const modify = () => {
 		axios
 			.patch(
-				`http://localhost:4000/board/${id}`,
+				`${process.env.REACT_APP_GAMESTATES_API_URL}board/${id}`,
 				{
 					title: titleRef.current.value,
 					description: contentRef.current.value,
@@ -87,7 +87,7 @@ function BoardCreate({ accessToken, isLogin }) {
 		} else {
 			axios
 				.post(
-					'http://localhost:4000/board',
+					`${process.env.REACT_APP_GAMESTATES_API_URL}board`,
 					{
 						title: titleRef.current.value,
 						description: contentRef.current.value,

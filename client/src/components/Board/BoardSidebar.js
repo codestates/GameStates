@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -12,8 +11,8 @@ function BoardSidebar({ boardData, accessToken, isLogin }) {
 			try {
 				const response = await axios({
 					method: 'get',
-					url: `${process.env.GAMESTATES_API_URL}`,
-					baseURL: `${process.env.GAMESTATES_API_URL}`,
+					url: `${process.env.REACT_APP_GAMESTATES_API_URL}board`,
+					baseURL: `${process.env.REACT_APP_GAMESTATES_API_URL}board`,
 				});
 				setData(response.data.data);
 			} catch (error) {
@@ -26,16 +25,18 @@ function BoardSidebar({ boardData, accessToken, isLogin }) {
 
 	useEffect(() => {
 		axios
-			.get(`${process.env.GAMESTATES_API_URL}user/getUserInfo`, {
+			.get(`${process.env.REACT_APP_GAMESTATES_API_URL}user/getUserInfo`, {
 				headers: { authorization: `Bearer ${accessToken}` },
 			})
 			.then((res) => {
 				// console.log(res.data.data);
 				setUserInfo(res.data.data);
+				console.log(res.data);
 			});
 	}, []);
 
 	const countPosts = data.filter((el) => el.userId === userInfo.id).length;
+
 	return (
 		<div className="sidebar">
 			<div className="mypage">
@@ -77,7 +78,4 @@ function BoardSidebar({ boardData, accessToken, isLogin }) {
 	);
 }
 
-BoardSidebar.propTypes = {
-	boardData: PropTypes.node.isRequired,
-};
 export default BoardSidebar;

@@ -38,7 +38,7 @@ function Login({
 		}
 		axios
 			.post(
-				`${process.env.REACT_APP_API_URL}`,
+				`${process.env.REACT_APP_GAMESTATES_API_URL}auth/login`,
 				{ email, password },
 				{ withCredentials: true },
 			)

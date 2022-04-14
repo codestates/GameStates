@@ -17,7 +17,7 @@ function Mypage({ accessToken, setIsLogin, setUserInfo, isLogin }) {
 
 	useEffect(() => {
 		axios
-			.get(`${process.env.REACT_APP_API_URL}`, {
+			.get(`${process.env.REACT_APP_GAMESTATES_API_URL}user/getUserInfo`, {
 				headers: { authorization: `Bearer ${accessToken}` },
 			})
 			.then((res) => {
@@ -34,7 +34,7 @@ function Mypage({ accessToken, setIsLogin, setUserInfo, isLogin }) {
 		if (window.confirm('정말 탈퇴하시겠습니까?')) {
 			axios
 				.delete(
-					`${process.env.REACT_APP_API_URL}`,
+					`${process.env.REACT_APP_GAMESTATES_API_URL}user/deleteUserInfo`,
 					{
 						headers: { authorization: `Bearer ${accessToken}` },
 					},

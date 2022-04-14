@@ -62,8 +62,9 @@ function Signup() {
 	};
 
 	const emailValidRequest = () => {
+		console.log(process.env.REACT_APP_GAMESTATES_API_URL);
 		axios
-			.post(`${process.env.REACT_APP_API_URL}`, {
+			.post(`${process.env.REACT_APP_GAMESTATES_API_URL}auth/validate`, {
 				email: userEmail,
 			})
 			.then((res) => {
@@ -87,7 +88,7 @@ function Signup() {
 		} else {
 			axios
 				.post(
-					`${process.env.REACT_APP_API_URL}`,
+					`${process.env.REACT_APP_GAMESTATES_API_URL}auth/signup`,
 					{
 						email,
 						password,

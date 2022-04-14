@@ -14,7 +14,7 @@ function BoardRead({ accessToken, isLogin }) {
 
 	const getBoardList = async () => {
 		await axios
-			.get(`${process.env.GAMESTATES_API_URL}`)
+			.get(`${process.env.REACT_APP_GAMESTATES_API_URL}board`)
 			.then((res) => setPosts(res.data.data));
 	};
 
@@ -27,8 +27,8 @@ function BoardRead({ accessToken, isLogin }) {
 			try {
 				const response = await axios({
 					method: 'get',
-					url: `${process.env.GAMESTATES_API_URL}${id}`,
-					baseURL: `${process.env.GAMESTATES_API_URL}`,
+					url: `${process.env.REACT_APP_GAMESTATES_API_URL}board/${id}`,
+					baseURL: `${process.env.REACT_APP_GAMESTATES_API_URL}`,
 				});
 				setRead(response.data.isCreated);
 				setNickname(response.data.isCreated.user);
@@ -43,7 +43,7 @@ function BoardRead({ accessToken, isLogin }) {
 	const del = () => {
 		if (window.confirm('삭제하시겠습니까?')) {
 			axios
-				.delete(`${process.env.GAMESTATES_API_URL}${id}`, {
+				.delete(`${process.env.REACT_APP_GAMESTATES_API_URL}${id}`, {
 					headers: { authorization: `Bearer ${accessToken}` },
 					withCredentials: true,
 				})
@@ -67,7 +67,7 @@ function BoardRead({ accessToken, isLogin }) {
 
 	useEffect(() => {
 		axios
-			.get(`${process.env.GAMESTATES_API_URL}user/getUserInfo`, {
+			.get(`${process.env.REACT_APP_GAMESTATES_API_URL}user/getUserInfo`, {
 				headers: { authorization: `Bearer ${accessToken}` },
 			})
 			.then((res) => {
@@ -81,7 +81,7 @@ function BoardRead({ accessToken, isLogin }) {
 	return (
 		<div className="wrap">
 			<div className="back">
-				<img src={`${process.env.PUBLIC_URL}img/jungleNuNu2.jpg`} alt="back" />
+				<img src={`${process.env.PUBLIC_URL}/img/jungleNuNu2.jpg`} alt="back" />
 			</div>
 
 			<div className="content">

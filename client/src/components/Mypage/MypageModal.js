@@ -56,7 +56,7 @@ function MypageModal({ accessToken }) {
 		}
 		axios
 			.patch(
-				`${process.env.REACT_APP_API_URL}`,
+				`${process.env.REACT_APP_GAMESTATES_API_URL}user/modifyUserInfo`,
 				{
 					nickname,
 					password,

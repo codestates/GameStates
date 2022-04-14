@@ -15,8 +15,8 @@ function BoardComment({ accessToken }) {
 			try {
 				const response = await axios({
 					method: 'get',
-					url: `${process.env.GAMESTATES_API_URL}${id}`,
-					baseURL: '${process.env.GAMESTATES_API_URL}',
+					url: `${process.env.REACT_APP_GAMESTATES_API_URL}board/${id}`,
+					baseURL: `${process.env.REACT_APP_GAMESTATES_API_URL}board`,
 				});
 				setRead(response.data.isCreated);
 				setcomments(response.data.isCreated.comments);
@@ -31,12 +31,15 @@ function BoardComment({ accessToken }) {
 	const del = async (commnetId) => {
 		if (window.confirm('삭제하시겠습니까?')) {
 			console.log('1');
-			await axios.delete(`${process.env.GAMESTATES_API_URL}${commnetId}`, {
-				headers: { authorization: `Bearer ${accessToken}` },
-				withCredentials: true,
-			});
+			await axios.delete(
+				`${process.env.REACT_APP_GAMESTATES_API_URL}comment/${commnetId}`,
+				{
+					headers: { authorization: `Bearer ${accessToken}` },
+					withCredentials: true,
+				},
+			);
 			axios
-				.get(`${process.env.GAMESTATES_API_URL}${id}`)
+				.get(`${process.env.REACT_APP_GAMESTATES_API_URL}board/${id}`)
 				.then((res) => setRead(res.data.isCreated));
 			// .then(() => navigate('/board'));
 		} else {
@@ -49,7 +52,7 @@ function BoardComment({ accessToken }) {
 			alert('모든 칸을 작성해야합니다!');
 		} else {
 			await axios.post(
-				`${process.env.GAMESTATES_API_URL}${id}`,
+				`${process.env.REACT_APP_GAMESTATES_API_URL}comment/${id}`,
 				{
 					comment: descriptionRef.current.value,
 				},
@@ -59,7 +62,7 @@ function BoardComment({ accessToken }) {
 				},
 			);
 			axios
-				.get(`${process.env.GAMESTATES_API_URL}${id}`)
+				.get(`${process.env.REACT_APP_GAMESTATES_API_URL}board/${id}`)
 				.then((res) => setRead(res.data.isCreated))
 				.then((descriptionRef.current.value = ''))
 				.then(alert('댓글 등록이 완료 되었습니다'));

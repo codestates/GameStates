@@ -7,7 +7,7 @@ function MainContents() {
 
 	const getBoardList = async () => {
 		await axios
-			.get(`http://localhost:4000/board`)
+			.get(`${process.env.REACT_APP_GAMESTATES_API_URL}board`)
 			.then((res) => setPosts(res.data.data));
 	};
 
