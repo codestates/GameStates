@@ -31,7 +31,7 @@ function BoardComment({ accessToken }) {
 	const del = async (commnetId) => {
 		if (window.confirm('삭제하시겠습니까?')) {
 			console.log('1');
-			await axios.delete(`${process.env.GAMESTATES_API_URL}/${commnetId}`, {
+			await axios.delete(`${process.env.GAMESTATES_API_URL}${commnetId}`, {
 				headers: { authorization: `Bearer ${accessToken}` },
 				withCredentials: true,
 			});
@@ -49,7 +49,7 @@ function BoardComment({ accessToken }) {
 			alert('모든 칸을 작성해야합니다!');
 		} else {
 			await axios.post(
-				`${process.env.GAMESTATES_API_URL}/${id}`,
+				`${process.env.GAMESTATES_API_URL}${id}`,
 				{
 					comment: descriptionRef.current.value,
 				},
