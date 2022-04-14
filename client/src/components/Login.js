@@ -2,7 +2,12 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
-function Login({ handleResponseSuccess, issueAccessToken }) {
+function Login({
+	handleResponseSuccess,
+	issueAccessToken,
+	setUserInfo,
+	setIsLogin,
+}) {
 	const [loginInfo, setLoginInfo] = useState({
 		email: '',
 		password: '',
@@ -46,6 +51,7 @@ function Login({ handleResponseSuccess, issueAccessToken }) {
 				} else {
 					handleResponseSuccess();
 					issueAccessToken(result.data.token);
+					alert('로그인 되었습니다.');
 					navigate('/');
 				}
 			})
