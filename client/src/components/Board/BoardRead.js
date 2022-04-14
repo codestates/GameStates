@@ -14,7 +14,7 @@ function BoardRead({ accessToken, isLogin }) {
 
 	const getBoardList = async () => {
 		await axios
-			.get(`http://localhost:4000/board`)
+			.get(`${process.env.GAMESTATES_API_URL}`)
 			.then((res) => setPosts(res.data.data));
 	};
 
@@ -27,8 +27,8 @@ function BoardRead({ accessToken, isLogin }) {
 			try {
 				const response = await axios({
 					method: 'get',
-					url: `http://localhost:4000/board/${id}`,
-					baseURL: 'http://localhost:4000/board/',
+					url: `${process.env.GAMESTATES_API_URL}${id}`,
+					baseURL: `${process.env.GAMESTATES_API_URL}`,
 				});
 				setRead(response.data.isCreated);
 				setNickname(response.data.isCreated.user);
@@ -43,7 +43,7 @@ function BoardRead({ accessToken, isLogin }) {
 	const del = () => {
 		if (window.confirm('삭제하시겠습니까?')) {
 			axios
-				.delete(`http://localhost:4000/board/${id}`, {
+				.delete(`${process.env.GAMESTATES_API_URL}${id}`, {
 					headers: { authorization: `Bearer ${accessToken}` },
 					withCredentials: true,
 				})
@@ -64,21 +64,10 @@ function BoardRead({ accessToken, isLogin }) {
 		e.preventDefault();
 		setSearch(e.target.value);
 	};
-	const onSerach = (e) => {
-		e.preventDefault();
-		if (search === null || search === '') {
-			axios
-				.get(`http://localhost:4003/articles`)
-				.then((res) => setPosts(res.data));
-		} else {
-			const filterData = posts.filter((el) => el.title.includes(search));
-			setPosts(filterData);
-		}
-	};
 
 	useEffect(() => {
 		axios
-			.get('http://localhost:4000/user/getUserInfo', {
+			.get(`${process.env.GAMESTATES_API_URL}user/getUserInfo`, {
 				headers: { authorization: `Bearer ${accessToken}` },
 			})
 			.then((res) => {
@@ -92,13 +81,13 @@ function BoardRead({ accessToken, isLogin }) {
 	return (
 		<div className="wrap">
 			<div className="back">
-				<img src={`${process.env.PUBLIC_URL}/img/jungleNuNu2.jpg`} alt="back" />
+				<img src={`${process.env.PUBLIC_URL}img/jungleNuNu2.jpg`} alt="back" />
 			</div>
 
 			<div className="content">
 				<div className="boardTitle">
 					<p>Board </p>
-					<form className="searchInput" onsSubmit={onSerach}>
+					<form className="searchInput">
 						<input
 							type="text"
 							name="search"

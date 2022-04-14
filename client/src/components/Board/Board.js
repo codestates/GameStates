@@ -8,7 +8,7 @@ import Pagination from './Pagination';
 function Board({ isLogin, accessToken }) {
 	const [posts, setPosts] = useState([]);
 	const getBoardList = async () => {
-		await axios.get(`http://localhost:4000/board`).then((res) => {
+		await axios.get(`${process.env.GAMESTATES_API_URL}`).then((res) => {
 			setPosts(res.data.data);
 		});
 	};
@@ -46,7 +46,7 @@ function Board({ isLogin, accessToken }) {
 	return (
 		<div className="wrap">
 			<div className="back">
-				<img src={`${process.env.PUBLIC_URL}/img/jungleNuNu2.jpg`} alt="back" />
+				<img src={`${process.env.PUBLIC_URL}img/jungleNuNu2.jpg`} alt="back" />
 			</div>
 
 			<div className="content">

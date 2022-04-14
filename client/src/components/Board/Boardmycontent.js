@@ -13,8 +13,8 @@ function Boardmycontent({ isLogin, accessToken }) {
 			try {
 				const response = await axios({
 					method: 'get',
-					url: `http://localhost:4000/board/`,
-					baseURL: 'http://localhost:4000/board/',
+					url: `${process.env.GAMESTATES_API_URL}`,
+					baseURL: process.env.GAMESTATES_API_URL,
 				});
 				setPosts(response.data.data);
 			} catch (error) {
@@ -27,7 +27,7 @@ function Boardmycontent({ isLogin, accessToken }) {
 
 	useEffect(() => {
 		axios
-			.get('http://localhost:4000/user/getUserInfo', {
+			.get(`${process.env.GAMESTATES_API_URL}user/getUserInfo`, {
 				headers: { authorization: `Bearer ${accessToken}` },
 			})
 			.then((res) => {
@@ -47,7 +47,7 @@ function Boardmycontent({ isLogin, accessToken }) {
 	return (
 		<div className="wrap">
 			<div className="back">
-				<img src={`${process.env.PUBLIC_URL}/img/jungleNuNu2.jpg`} alt="back" />
+				<img src={`${process.env.PUBLIC_URL}img/jungleNuNu2.jpg`} alt="back" />
 			</div>
 
 			<div className="content">
