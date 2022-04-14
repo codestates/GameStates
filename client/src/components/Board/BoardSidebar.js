@@ -12,8 +12,8 @@ function BoardSidebar({ boardData, accessToken, isLogin }) {
 			try {
 				const response = await axios({
 					method: 'get',
-					url: `http://localhost:4000/board/`,
-					baseURL: 'http://localhost:4000/board/',
+					url: `${process.env.GAMESTATES_API_URL}`,
+					baseURL: `${process.env.GAMESTATES_API_URL}`,
 				});
 				setData(response.data.data);
 			} catch (error) {
@@ -26,7 +26,7 @@ function BoardSidebar({ boardData, accessToken, isLogin }) {
 
 	useEffect(() => {
 		axios
-			.get('http://localhost:4000/user/getUserInfo', {
+			.get(`${process.env.GAMESTATES_API_URL}user/getUserInfo`, {
 				headers: { authorization: `Bearer ${accessToken}` },
 			})
 			.then((res) => {
