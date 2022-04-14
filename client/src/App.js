@@ -37,27 +37,26 @@ function App() {
 
 	// 서버에 토큰을 보내며 로그아웃 요청
 	const handleLogout = () => {
-		axios
-			.post(
-				'http://localhost:4000/auth/logout',
-				null,
-				{
-					headers: { authorization: `Bearer ${accessToken}` },
-				},
-				{
-					withCredentials: true,
-				},
-			)
-			.then((res) => {
-				setUserInfo(null);
-				setIsLogin(false);
-				navigate('/');
-			});
+		if (window.confirm('정말 로그아웃 하시겠습니까?')) {
+			axios
+				.post(
+					'http://localhost:4000/auth/logout',
+					null,
+					{
+						headers: { authorization: `Bearer ${accessToken}` },
+					},
+					{
+						withCredentials: true,
+					},
+				)
+				.then((res) => {
+					setUserInfo(null);
+					setIsLogin(false);
+					alert('로그아웃 되었습니다.');
+					navigate('/');
+				});
+		}
 	};
-
-	// useEffect(() => {
-	// 	setIsLogin(false);
-	// }, []);
 
 	useEffect(() => {
 		const url = new URL(window.location.href);
@@ -76,7 +75,11 @@ function App() {
 				},
 				withCredentials: true,
 			})
-			.then((result) => console.log(result));
+			.then((result) => {
+				alert('로그인 되었습니다.');
+				handleResponseSuccess();
+				navigate('/');
+			});
 		// 액세스 토큰을 받아온다.
 	}
 
@@ -95,6 +98,7 @@ function App() {
 						<Mypage
 							userInfo={userInfo}
 							accessToken={accessToken}
+							isLogin={isLogin}
 							setIsLogin={setIsLogin}
 							setUserInfo={setUserInfo}
 							handleLogout={handleLogout}
@@ -105,24 +109,18 @@ function App() {
 					path="/login"
 					element={
 						<Login
+							setIsLogin={setIsLogin}
+							setUserInfo={setUserInfo}
 							issueAccessToken={issueAccessToken}
 							handleResponseSuccess={handleResponseSuccess}
 						/>
 					}
 				/>
-				<Route path="/signup" element={<Signup isLogin={isLogin} />} />
+				<Route
+					path="/signup"
+					element={<Signup isLogin={isLogin} accessToken={accessToken} />}
+				/>
 				<Route path="/logout" element={<Logout />} />
-				{/* <Route
-					path="/mypage"
-					element={
-						<Mypage
-							userInfo={userInfo}
-							accessToken={accessToken}
-							setIsLogin={setIsLogin}
-							setUserInfo={setUserInfo}
-						/>
-					}
-				/> */}
 				<Route
 					path="/mypagemodal"
 					element={<MypageModal accessToken={accessToken} />}

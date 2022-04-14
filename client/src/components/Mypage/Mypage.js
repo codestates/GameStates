@@ -1,10 +1,11 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-alert */
 /* eslint-disable no-empty */
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
-function Mypage({ accessToken, setIsLogin, setUserInfo }) {
+function Mypage({ accessToken, setIsLogin, setUserInfo, isLogin }) {
 	const navigate = useNavigate();
 	const [email, setEmail] = useState('');
 	const [nickname, setNickname] = useState('');
@@ -68,11 +69,17 @@ function Mypage({ accessToken, setIsLogin, setUserInfo }) {
 						</div>
 					</div>
 					<div className="mypageBtn">
-						<Link to="/mypagemodal">
+						{isLogin ? (
+							<Link to="/mypagemodal">
+								<button type="submit" className="edit-btn">
+									수정
+								</button>
+							</Link>
+						) : (
 							<button type="submit" className="edit-btn">
 								수정
 							</button>
-						</Link>
+						)}
 						<Link to="/">
 							<button type="submit" className="save-btn">
 								저장

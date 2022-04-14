@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 81vh;
     width: 100vw;
     background-color: #f3f5f7;
   .container-view {
@@ -15,7 +15,7 @@
         height: 100%;
       .container-view_title {
           font-weight: 400;
-          font-size: 30px;
+          font-size: 25px;
           line-height: 1px;
       }
       .edit-table {
@@ -73,15 +73,17 @@
         //   display: inline-block;
         padding: 7px 15px 7px 15px;
         margin-right: 10px;
-        border: none;
-        //     cursor: pointer;
-        //     transition: 0.3s;
-        //     background-color: #ff5500;
-        //   }
+        line-height: 15px;
+        font-size: 12px;
+        border: solid 1px #c4c4c4;
+        background: #fff;
+        color: grey;
+        border-radius: 5px;
+        cursor: pointer;
             &:hover {
               cursor: pointer;
               transition: 0.3s;
-              background-color: #ff5500;
+              background-color: #c4c4c4;
               color: white;
 
           }
@@ -89,18 +91,18 @@
         .save-btn {
           padding: 7px 15px 7px 15px;
           border: none;
-
-          //   display: block;
-          //   margin-top: 20px;
-          //   height: 40px;
-          //   width: 10%;
-          //   float: right;
-          //   border: 0;
-          &:hover {
-              cursor: pointer;
-              transition: 0.3s;
-              background-color: #ff5500;
-              color: white;
+          line-height: 15px;
+          font-size: 12px;
+          border: solid 1px #c4c4c4;
+          background: #fff;
+          color: grey;
+          border-radius: 5px;
+          cursor: pointer;
+              &:hover {
+                cursor: pointer;
+                transition: 0.3s;
+                background-color: #c4c4c4;
+                color: white;
 
           }
         }
@@ -108,7 +110,7 @@
       .user-delete_title {
           margin-top: 70px;
           font-weight: 400;
-          font-size: 30px;
+          font-size: 25px;
           line-height: 1px;
       }
       .user-delete_sub {
@@ -144,10 +146,17 @@
       }
       .user-delete-btn {
           padding: 7px 15px 7px 15px;
-          border: none;
           margin-top: 20px;
+          line-height: 15px;
+          font-size: 12px;
+          border-color: #ff2216;
+          background: #fff;
+          color: #ff2216;
+          border: solid 1px;
+          border-radius: 5px;
+          cursor: pointer;
           &:hover {
-            background-color: #ff5500;
+            background-color: #ff2216;
             transition: 0.3s;
             cursor: pointer;
             color: white;
@@ -166,7 +175,7 @@
   .edit-modal_backdrop {
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.3);
+      background-color: #f3f5f7;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -191,7 +200,7 @@
           .edit_th {
               display: table-cell;
               font-weight: 400;
-              font-size: 16px;
+              font-size: 15px;
               line-height: 19px;
               line-height: 1.5;
               border-bottom: 1px solid #e9edef;
@@ -209,7 +218,7 @@
               vertical-align: middle;
               display: table-cell;
               font-weight: 400;
-              font-size: 16px;
+              font-size: 16x;
               line-height: 19px;
               line-height: 1.5;
               border-bottom: 1px solid #e9edef;
@@ -220,8 +229,9 @@
                 border: 1px solid #e9edef;
                 width: 200px;
                 height: 30px;
-                font-size: 15px;
+                font-size: 14px;
                 font-weight: 400;
+                padding-left: 10px;
               }
             .edit-nickname-btn {
                 height: 25px;
@@ -258,26 +268,34 @@
         //   display: inline-block;
         padding: 7px 15px 7px 15px;
         margin-right: 10px;
-        border: none;
-        //     cursor: pointer;
-        //     transition: 0.3s;
-        //     background-color: #ff5500;
-        //   }
+        line-height: 15px;
+        font-size: 12px;
+        border: solid 1px #c4c4c4;
+        background: #fff;
+        color: grey;
+        border-radius: 5px;
+        cursor: pointer;
             &:hover {
               cursor: pointer;
               transition: 0.3s;
-              background-color: #ff5500;
+              background-color: #c4c4c4;
               color: white;
-          }
+        }
          }
         .save-btn {
           padding: 7px 15px 7px 15px;
-          border: none;
-          &:hover {
-              cursor: pointer;
-              transition: 0.3s;
-              background-color: #ff5500;
-              color: white;
+          line-height: 15px;
+          font-size: 12px;
+          border: solid 1px #c4c4c4;
+          background: #fff;
+          color: grey;
+          border-radius: 5px;
+          cursor: pointer;
+              &:hover {
+                cursor: pointer;
+                transition: 0.3s;
+                background-color: #c4c4c4;
+                color: white;
 
           }
         }

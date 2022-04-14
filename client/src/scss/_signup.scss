@@ -9,8 +9,8 @@
   z-index: 100;
   top: 0;
   .modal-view {
-    width: 610px;
-    height: 90vh;
+    width: 600px;
+    height: 89vh;
     background-color: #ffffff;
     font-size: 3rem;
     display: flex;
@@ -18,7 +18,7 @@
     position: absolute;
     border-radius: 15px;
     .modal-view_header {
-      padding-top: 88px;
+      padding-top: 50px;
       .modal-view_logo {
         text-align: center;
         color: #ff5000;
@@ -27,7 +27,7 @@
     }
     .modal-view_body {
       height: 500px;
-      margin: 80px;
+      margin: 60px;
       .hide{
         display: none;
       }
@@ -52,9 +52,8 @@
       .input-container {
           position: relative;
         .email-input {
-          // position: absolute;
           margin-top: 15px;
-          padding: 10px 0 11px;
+          padding: 5px;
           width: 100%;
           border-bottom: 1px solid #dddfe4;
           font-size: 16px;
@@ -71,9 +70,10 @@
         .email-valid-btn {
             position: absolute;
             background-color: #dddfe4;
-            left: 410px;
+            border-radius: 10px;
+            width: 50px;
+            left: 430px;
             top: 25px;
-            font-weight: 400;
             font-size: 15px;
             color: white;
             &:hover {
@@ -86,7 +86,7 @@
       }
       input {
         margin-top: 15px;
-        padding: 10px 0 11px;
+        padding: 5px;
         border: 0;
         width: 100%;
         border-bottom: 1px solid #dddfe4;
@@ -103,32 +103,35 @@
         }
     }
       .email-invalid-message {
-        margin-top: 10px;
-        font-size: 15px;
+        margin-top: 5px;
+        font-size: 13px;
         color: red;
         float: left;
       }
       .password-invalid-message {
-        margin-top: 10px;
-        font-size: 15px;
+        margin-top: 5px;
+        font-size: 13px;
         color: red;
         float: left;
       }
       
       .nickname-invalid-message {
-        margin-top: 10px;
-        font-size: 15px;
+        margin-top: 5px;
+        font-size: 13px;
         color: red;
         float: left;
       }
       .btn-container {
+        display:inline-block;
         text-align: center;
         .register_button {
-          margin-top: 50px;
+          border-radius: 5px;
+          margin-top: 30px;
+          margin-left: 60px;
           font-size: 16px;
           background-color: #dddfe4;
           color: white;
-          height: 56px;
+          padding: 15px;
           width: 210px;
           font-family: 'Jua', sans-serif;
           font-weight: bold;
@@ -140,11 +143,12 @@
           }
         }
         .cancel_button {
-          margin-top: 50px;
+          border-radius: 5px;
+          margin-top: 30px;
           font-size: 16px;
           background-color: #dddfe4;
           color: white;
-          height: 56px;
+          padding: 15px;
           width: 210px;
           font-family: 'Jua', sans-serif;
           font-weight: bold;
@@ -187,11 +191,6 @@
   }
 }
 
-@media screen and (max-width: $sm) {
-  .modal-container {
-    background-color: #ffffff;
-  }
-}
 
 
 

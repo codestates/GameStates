@@ -50,9 +50,7 @@ function MypageModal({ accessToken }) {
 	};
 
 	// 유저정보 수정 후 서버에 확인 버튼 클릭시 요청
-	console.log(nickname);
 	const saveEditUserInfo = () => {
-		// const { editData } = { data: { password, nickname } };
 		if (nickname === '' || password === '') {
 			alert('모든 칸을 작성해야합니다!');
 		}

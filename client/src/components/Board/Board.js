@@ -5,12 +5,12 @@ import BoardList from './BoardList';
 import BoardSidebar from './BoardSidebar';
 import Pagination from './Pagination';
 
-function Board({ isLogin, accessToken, islogin }) {
+function Board({ isLogin, accessToken }) {
 	const [posts, setPosts] = useState([]);
 	const getBoardList = async () => {
-		await axios
-			.get(`http://localhost:4000/board`)
-			.then((res) => setPosts(res.data.data));
+		await axios.get(`http://localhost:4000/board`).then((res) => {
+			setPosts(res.data.data);
+		});
 	};
 
 	useEffect(() => {

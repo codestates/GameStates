@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 const axios = require("axios");
 const { user } = require("../models");
+const random = require("./validateEmail");
 // 임시 수정 (user: User) 사용시 변환 질문하기
 // model 명 일치시키기
 const {
@@ -66,12 +67,11 @@ module.exports = {
     if (!email || !nickname || !password || !validate) {
       return res.json({ message: "필수 항목을 입력하세요." });
     }
-    console.log(validate);
     try {
-      // if (validate !== "123345") {
-      //   return res.send("올바른 인증번호를 입력하세요.");
-      // }
-      const USER = await user.findOne({ where: { email } });
+      if (Number(validate) !== random.number) {
+        return res.json({ message: "Fail" });
+      }
+      const USER = await user.findOne({ where: { email, nickname } });
       // 비밀번호 암호화하기
       const hashed = await bcrypt.hash(password, 10);
 

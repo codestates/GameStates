@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { FaBars } from 'react-icons/fa';
+import { FaBars, FaRegUserCircle } from 'react-icons/fa';
 import { HiOutlineX } from 'react-icons/hi';
 import { useState } from 'react';
 
@@ -23,7 +23,11 @@ function Header({ isLogin, handleLogout }) {
 							<NavLink to="/board">Board</NavLink>
 						</li>
 						<li>
-							<NavLink to="/Mypage">Mypage</NavLink>
+							<div>
+								<NavLink to="/Mypage" className="mypageIcon">
+									Mypage
+								</NavLink>
+							</div>
 						</li>
 						<li>
 							<NavLink to="/" onClick={() => handleLogout()}>

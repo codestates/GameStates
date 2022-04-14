@@ -13,6 +13,7 @@ function Signup() {
 	const [userNickname, SetUserNickname] = useState('');
 	const [validNumber, setValidNumber] = useState('');
 	const [errorMessage, setErrorMessage] = useState('');
+	const [isShow, setIsShow] = useState(false);
 
 	// 유효한 인증번호를 입력했는지 확인
 	const isVaildNumber = (e) => {
@@ -61,19 +62,26 @@ function Signup() {
 	};
 
 	const emailValidRequest = () => {
-		axios.post('http://localhost:4000/auth/validate', {
-			email: userEmail,
-		});
+		axios
+			.post('http://localhost:4000/auth/validate', {
+				email: userEmail,
+			})
+			.then((res) => {
+				if (res.data.message === '이미 사용중인 이메일입니다.') {
+					alert('이미 사용중인 이메일입니다.');
+				}
+				setIsShow(true);
+			});
 	};
 
-	// 3가지 항목을 모두 입력했는지 확인
+	// 4가지 항목을 모두 입력했는지 확인
 	// 계정 만들기 버튼을 클릭 시 서버로 회원가입 정보를 요청
 	const handleSignup = () => {
 		const email = userEmail;
 		const password = userPassword;
 		const nickname = userNickname;
 		const validate = validNumber;
-
+		// 4개 항목 중 하나라도 입력이 안된 상태에서 계정 생성 할 시
 		if (!userEmail || !userPassword || !userNickname || !validNumber) {
 			setErrorMessage('모든 항목은 필수입니다.');
 		} else {
@@ -90,7 +98,14 @@ function Signup() {
 						withCredentials: true,
 					},
 				)
-				.then(() => navigate('/login'));
+				.then((res) => {
+					if (res.data.message === 'Fail') {
+						alert('인증번호를 확인해주세요!');
+					} else {
+						alert('회원가입이 완료되었습니다.');
+						navigate('/login');
+					}
+				});
 		}
 	};
 
@@ -144,14 +159,13 @@ function Signup() {
 						<div className="nickname-invalid-message hide">
 							유효한 닉네임을 입력해 주시기 바랍니다.
 						</div>
-						<input
-							type="email"
-							placeholder="인증번호"
-							onChange={isVaildNumber}
-						/>
-						<div className="email-invalid-message hide">
-							유효한 이메일 주소를 입력해 주시기 바랍니다.
-						</div>
+						{isShow ? (
+							<input
+								type="email"
+								placeholder="인증번호"
+								onChange={isVaildNumber}
+							/>
+						) : null}
 					</form>
 					<div className="btn-container">
 						<Link to="/login">
