@@ -40,7 +40,7 @@ function App() {
 		if (window.confirm('정말 로그아웃 하시겠습니까?')) {
 			axios
 				.post(
-					'http://localhost:4000/auth/logout',
+					`${process.env.REACT_APP_API_URL}`,
 					null,
 					{
 						headers: { authorization: `Bearer ${accessToken}` },

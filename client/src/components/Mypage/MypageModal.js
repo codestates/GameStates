@@ -56,7 +56,7 @@ function MypageModal({ accessToken }) {
 		}
 		axios
 			.patch(
-				'http://localhost:4000/user/modifyUserInfo',
+				`${process.env.REACT_APP_API_URL}`,
 				{
 					nickname,
 					password,

@@ -63,7 +63,7 @@ function Signup() {
 
 	const emailValidRequest = () => {
 		axios
-			.post('http://localhost:4000/auth/validate', {
+			.post(`${process.env.REACT_APP_API_URL}`, {
 				email: userEmail,
 			})
 			.then((res) => {
@@ -87,7 +87,7 @@ function Signup() {
 		} else {
 			axios
 				.post(
-					'http://localhost:4000/auth/signup',
+					`${process.env.REACT_APP_API_URL}`,
 					{
 						email,
 						password,

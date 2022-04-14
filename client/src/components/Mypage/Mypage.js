@@ -17,7 +17,7 @@ function Mypage({ accessToken, setIsLogin, setUserInfo, isLogin }) {
 
 	useEffect(() => {
 		axios
-			.get('http://localhost:4000/user/getUserInfo', {
+			.get(`${process.env.REACT_APP_API_URL}`, {
 				headers: { authorization: `Bearer ${accessToken}` },
 			})
 			.then((res) => {
@@ -34,7 +34,7 @@ function Mypage({ accessToken, setIsLogin, setUserInfo, isLogin }) {
 		if (window.confirm('정말 탈퇴하시겠습니까?')) {
 			axios
 				.delete(
-					'http://localhost:4000/user/deleteUserInfo',
+					`${process.env.REACT_APP_API_URL}`,
 					{
 						headers: { authorization: `Bearer ${accessToken}` },
 					},

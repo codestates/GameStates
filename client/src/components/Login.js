@@ -38,7 +38,7 @@ function Login({
 		}
 		axios
 			.post(
-				'http://localhost:4000/auth/login',
+				`${process.env.REACT_APP_API_URL}`,
 				{ email, password },
 				{ withCredentials: true },
 			)
