@@ -14,7 +14,7 @@
 
 - 김도형 (Front-End): <dobro92@gmail.com>
 - 김유정 (Front-End): <dbwjdrkddls1@gmail.com>
-- 김세현 (Back-End): <address@example.com>
+- 김세현 (Back-End): <wkaaksqh758@naver.com>
 - 이국진 (Back-End): <cptkuk91@gmail.com>
 
 ---
