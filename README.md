@@ -4,8 +4,8 @@
 >
 > _게임을 좋아하는 사람들이, 자신의 존재감과 의사 표현을 자유롭게 할 수 있는 커뮤니티_
 
-[**GameStates 바로가기**](https://google.com, "google link")
-
+<!-- [**GameStates 바로가기**](https://google.com, "google link")
+ -->
 ![스크린샷 2022-04-15 오후 3 11 25](https://user-images.githubusercontent.com/91901468/163529219-f29920af-d2bd-4f69-9760-cb953e63b743.png)
 
 ---
