@@ -13,7 +13,7 @@
 ### Project Team Member
 
 - 김도형 (Front-End): <dobro92@gmail.com>
-- 김유정 (Front-End): <address@example.com>
+- 김유정 (Front-End): <dbwjdrkddls1@gmail.com>
 - 김세현 (Back-End): <address@example.com>
 - 이국진 (Back-End): <cptkuk91@gmail.com>
 
@@ -28,9 +28,3 @@
 - [x] 댓글 조회, 글 쓰기, 수정, 삭제
 
 ---
-
-### 기존 게임 커뮤니티와의 차이점
-
-- 기존 게임 커뮤니티는 html, css, JavaScript 만으로 구성됐다. (React로.. 어쩌구 저쩌구..)
-- 반응형
-
